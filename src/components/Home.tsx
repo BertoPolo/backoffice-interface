@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Container, Card, CardContent, Typography, CardMedia, TextField, Button, Alert } from "@mui/material/"
-import { IUser } from "../../types/index"
+import { IUser } from "@/types"
 
 const Home = () => {
   const [users, setUsers] = useState<IUser[]>([])
