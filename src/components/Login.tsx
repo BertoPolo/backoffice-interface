@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container } from "@mui/material/"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -27,11 +29,11 @@ const LoginPage = () => {
       if (!response.ok) {
         throw new Error("Login failed")
       }
-
       const data = await response.json()
       console.log(data)
-    } catch (error) {
-      // setError("Login failed: " + error.message)
+      navigate("/users")
+    } catch (error: any) {
+      setError("Login failed: " + error.message)
     }
   }
 
