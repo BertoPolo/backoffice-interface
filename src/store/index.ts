@@ -1,11 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
-import usersSlice from "../slices/items/usersSlice"
+import loginSlice from "../slices/loginSlice"
+// import usersSlice from "../slices/usersSlice"
 import storage from "redux-persist/lib/storage"
 import { encryptTransform } from "redux-persist-transform-encrypt"
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist"
 
 const reducers = combineReducers({
-  usersSlice: usersSlice,
+  loginSlice: loginSlice,
+  // usersSlice: usersSlice,
 })
 
 const persistConfig = {

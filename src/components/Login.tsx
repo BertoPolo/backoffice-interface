@@ -1,12 +1,19 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container } from "@mui/material/"
+import { addToken } from "../slices/loginSlice"
+import { useSelector, useDispatch } from "react-redux"
+import { IUser, tokenState } from "@/types"
 
 const LoginPage = () => {
+  const token = useSelector((state: tokenState) => state.loginSlice.token)
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -30,7 +37,8 @@ const LoginPage = () => {
         throw new Error("Login failed")
       }
       const data = await response.json()
-      console.log(data)
+      dispatch(addToken(data.token))
+
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)
