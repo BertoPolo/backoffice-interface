@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
@@ -24,7 +24,6 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Alberto's Assessment
           </Typography>
-
           {isLogged ? (
             <Button
               color="inherit"
