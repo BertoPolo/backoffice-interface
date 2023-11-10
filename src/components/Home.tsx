@@ -3,11 +3,11 @@ import { Container, Card, CardContent, Typography, CardMedia, TextField, Button,
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 // import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
-import { IUser, tokenState } from "@/types"
-import { removeToken } from "../slices/loginSlice"
+import { IUser, loginState } from "@/types"
+import { removeToken, logOut } from "../slices/loginSlice"
 
 const Home = () => {
-  const token = useSelector((state: tokenState) => state.loginSlice.token)
+  const token = useSelector((state: loginState) => state.loginSlice.token)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -38,9 +38,23 @@ const Home = () => {
 
   const isLastPage = page * 6 >= totalUsers
 
+  const handleWindowClose = (event: any) => {
+    // change ANY type
+    dispatch(removeToken(""))
+    dispatch(logOut(false))
+  }
+
   useEffect(() => {
     fetchUsers()
   }, [page])
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleWindowClose)
+
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowClose)
+    }
+  }, [])
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {

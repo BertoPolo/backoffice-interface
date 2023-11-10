@@ -5,8 +5,9 @@ export interface IUser {
   last_name: string
   avatar: string
 }
-export interface tokenState {
+export interface loginState {
   loginSlice: {
     token: string
+    isLogged: boolean
   }
 }

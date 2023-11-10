@@ -1,7 +1,16 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
+import { logOut, removeToken } from "../slices/loginSlice"
+import { loginState } from "@/types"
 
 const Navbar = () => {
+  const isLogged = useSelector((state: loginState) => state.loginSlice.isLogged)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -13,9 +22,25 @@ const Navbar = () => {
             </svg>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Alberto's Assessment
           </Typography>
-          <Button color="inherit">Log Out</Button>
+
+          {isLogged ? (
+            <Button
+              color="inherit"
+              onClick={() => {
+                dispatch(removeToken(""))
+                dispatch(logOut(false))
+                navigate("/")
+              }}
+            >
+              Log Out
+            </Button>
+          ) : (
+            <Button color="inherit" onClick={() => navigate("/")}>
+              log In
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

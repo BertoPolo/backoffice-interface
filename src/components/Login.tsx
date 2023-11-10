@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container } from "@mui/material/"
-import { addToken } from "../slices/loginSlice"
+import { addToken, logIn } from "../slices/loginSlice"
 import { useSelector, useDispatch } from "react-redux"
-import { IUser, tokenState } from "@/types"
+import { IUser, loginState } from "@/types"
 
 const LoginPage = () => {
-  const token = useSelector((state: tokenState) => state.loginSlice.token)
+  const token = useSelector((state: loginState) => state.loginSlice.token)
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -38,7 +38,7 @@ const LoginPage = () => {
       }
       const data = await response.json()
       dispatch(addToken(data.token))
-
+      dispatch(logIn(true))
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)
