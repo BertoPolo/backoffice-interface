@@ -15,6 +15,7 @@ const Home = () => {
   const [users, setUsers] = useState<IUser[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
+  const [totalUsers, setTotalUsers] = useState(0) // Total number of users retrieved from API
   const [page, setPage] = useState(1)
   const [error, setError] = useState("")
 
@@ -29,10 +30,13 @@ const Home = () => {
       const data = await response.json()
       setUsers(data.data)
       setFilteredUsers(data.data)
+      setTotalUsers(data.total)
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to fetch users")
     }
   }
+
+  const isLastPage = page * 6 >= totalUsers
 
   useEffect(() => {
     fetchUsers()
@@ -67,10 +71,6 @@ const Home = () => {
 
       {token ? (
         <Container maxWidth="md">
-          <Button variant="contained" color="primary" onClick={() => dispatch(removeToken)}>
-            log out
-          </Button>
-
           <TextField
             label="Search Users"
             variant="outlined"
@@ -104,7 +104,9 @@ const Home = () => {
           <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
             Previous
           </Button>
-          <Button onClick={() => setPage((prev) => prev + 1)}>Next</Button>
+          <Button onClick={() => setPage((prev) => prev + 1)} disabled={isLastPage}>
+            Next
+          </Button>
         </Container>
       ) : (
         // if you you dont have an access token
