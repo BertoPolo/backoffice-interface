@@ -161,13 +161,14 @@ const Home = () => {
                 </Card>
               </Grid>
             ))}
+            {filteredUsers.length === 0 && <Alert severity="error">no users found</Alert>}
           </Grid>
 
           {/* Pagination buttons */}
           <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
             Previous
           </Button>
-          <Button onClick={() => setPage((prev) => prev + 1)} disabled={isLastPage}>
+          <Button onClick={() => setPage((prev) => prev + 1)} disabled={isLastPage || filteredUsers.length <= 1}>
             Next
           </Button>
         </Container>
