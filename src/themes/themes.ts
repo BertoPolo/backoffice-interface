@@ -30,6 +30,9 @@ export const lightTheme = createTheme({
       secondary: "rgba(0, 0, 0, 0.54)",
     },
   },
+  // typography: {
+  //   fontFamily: '"Press Start 2P", cursive',
+  // },
 })
 
 //  mytheme: {
