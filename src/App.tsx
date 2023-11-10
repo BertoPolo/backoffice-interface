@@ -10,15 +10,15 @@ import { darkTheme, lightTheme } from "./themes/themes"
 const App: React.FC = () => {
   const [themeMode, setThemeMode] = useState<"light" | "dark">(localStorage.getItem("themeMode") === "dark" ? "dark" : "light")
 
-  useEffect(() => {
-    localStorage.setItem("themeMode", themeMode)
-  }, [themeMode])
-
   const currentTheme = themeMode === "light" ? lightTheme : darkTheme
 
   const handleThemeChange = () => {
     setThemeMode(themeMode === "light" ? "dark" : "light")
   }
+
+  useEffect(() => {
+    localStorage.setItem("themeMode", themeMode)
+  }, [themeMode])
 
   return (
     <BrowserRouter>

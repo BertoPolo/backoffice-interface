@@ -4,38 +4,99 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#5f5fb1",
+      main: "#1d6c91",
     },
     secondary: {
-      main: "#8ff4aa",
+      main: "#a0ffe8",
+    },
+    success: {
+      main: "#1ca08a",
+    },
+    info: {
+      main: "#81b8df",
+    },
+    warning: {
+      main: "#ca6e0c",
+    },
+    error: {
+      main: "#f41027",
     },
     background: {
-      default: "#121212",
-      paper: "#1e1e1e",
+      default: "#ededee",
+      paper: "#ffffff",
     },
     text: {
-      primary: "#fff",
-      secondary: "#b3b3b3",
+      primary: "#141824",
+      secondary: "rgba(0, 0, 0, 0.54)",
     },
   },
 })
+
+//  mytheme: {
+
+//  "primary": "#1d6c91",
+
+//  "secondary": "#a0ffe8",
+
+//  "accent": "#73e855",
+
+//  "neutral": "#141824",
+
+//  "base-100": "#ededee",
+
+//  "info": "#81b8df",
+
+//  "success": "#1ca08a",
+
+//  "warning": "#ca6e0c",
+
+//  "error": "#f41027",
+//           },
 
 export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#27273F",
+      main: "#b3ea85",
     },
     secondary: {
-      main: "#f48fb1",
+      main: "#74abcc",
+    },
+    success: {
+      main: "#1db478",
+    },
+    info: {
+      main: "#4f82c9",
+    },
+    warning: {
+      main: "#ceaa09",
+    },
+    error: {
+      main: "#dd223e",
     },
     background: {
-      default: "#121212",
-      paper: "#1e1e1e",
+      default: "#21384a",
+      paper: "#202b32",
     },
     text: {
-      primary: "#fff",
-      secondary: "#b3b3b3",
+      primary: "#ffffff",
+      secondary: "202b32",
     },
   },
 })
+
+// primary: "#b3ea85",
+// secondary:"#74abcc",
+
+//  "neutral": "#202b32",
+
+//  "base-100": "#21384a",
+
+//  "info": "#4f82c9",
+
+//  "success": "#1db478",
+
+//  "warning": "#ceaa09",
+
+//  "error": "#dd223e",
+//           }
