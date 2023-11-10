@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, SyntheticEvent } from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, TextField, Container } from "@mui/material/"
+import { Button, TextField, Container, Box, Snackbar } from "@mui/material/"
+import MuiAlert from "@mui/material/Alert"
 import { addToken, logIn } from "../slices/loginSlice"
 import { useSelector, useDispatch } from "react-redux"
-import { IUser, loginState } from "@/types"
+import { loginState } from "@/types"
 
 const LoginPage = () => {
   const token = useSelector((state: loginState) => state.loginSlice.token)
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [openSnackbar, setOpenSnackbar] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -34,6 +36,8 @@ const LoginPage = () => {
       })
 
       if (!response.ok) {
+        setError("Your credentials are not okay")
+        setOpenSnackbar(true)
         throw new Error("Login failed")
       }
       const data = await response.json()
@@ -44,24 +48,46 @@ const LoginPage = () => {
       setError("Login failed: " + error.message)
     }
   }
+  const handleCloseSnackbar = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return
+    }
+    setOpenSnackbar(false)
+  }
 
   return (
-    <Container maxWidth="xs">
-      <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
-      <TextField
-        label="Password"
-        variant="outlined"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <Button variant="contained" color="primary" onClick={handleLogin} fullWidth>
-        Login
-      </Button>
-      {error && <div>{error}</div>}
-    </Container>
+    <>
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="90vh">
+        <Container maxWidth="xs" className="login-container">
+          <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <Button variant="contained" color="primary" onClick={handleLogin} fullWidth>
+            Login
+          </Button>
+          {error && <div>Your credentials are not okay</div>}
+        </Container>
+      </Box>
+
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+        <Container maxWidth="xs">
+          {/* Your text fields and buttons */}
+
+          {/* <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+            <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="error">
+              {error}
+            </MuiAlert>
+          </Snackbar> */}
+        </Container>
+      </Box>
+    </>
   )
 }
 

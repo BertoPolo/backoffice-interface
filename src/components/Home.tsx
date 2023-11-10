@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { Container, Card, CardContent, Typography, CardMedia, Grid, IconButton, TextField, Button, Alert } from "@mui/material/"
+import { Container, Card, CardContent, Typography, CardMedia, Box, Grid, IconButton, TextField, Button, Alert, InputAdornment } from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
+import SearchIcon from "@mui/icons-material/Search"
 // import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
 import { IUser, loginState } from "@/types"
 import { removeToken, logOut } from "../slices/loginSlice"
@@ -95,17 +96,46 @@ const Home = () => {
     <>
       {token ? (
         <Container maxWidth="md">
-          <TextField
-            label="Search Users"
-            variant="outlined"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <Button variant="contained" color="primary" onClick={handleSearch}>
-            Search
-          </Button>
+          <Box display="flex" alignItems="center" gap={1}>
+            <TextField
+              placeholder="Search Users"
+              variant="outlined"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              fullWidth
+              margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton onClick={handleSearch} edge="start" onKeyDown={handleSearch}>
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                style: {
+                  borderRadius: "20px", // Rounded corners
+                },
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch()
+                }
+              }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderWidth: "0", // Removes border
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: "0", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderWidth: "0", // Removes border on focus
+                  },
+                },
+              }}
+            />
+          </Box>
 
           <Grid container spacing={2}>
             {filteredUsers.map((user) => (
