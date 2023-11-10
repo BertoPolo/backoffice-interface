@@ -48,7 +48,7 @@ const LoginPage = () => {
       setError("Login failed: " + error.message)
     }
   }
-  const handleCloseSnackbar = (event?: SyntheticEvent, reason?: string) => {
+  const handleCloseSnackbar = (event: SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") {
       return
     }
@@ -72,19 +72,16 @@ const LoginPage = () => {
           <Button variant="contained" color="primary" onClick={handleLogin} fullWidth>
             Login
           </Button>
-          {error && <div>Your credentials are not okay</div>}
         </Container>
       </Box>
 
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
         <Container maxWidth="xs">
-          {/* Your text fields and buttons */}
-
-          {/* <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
             <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="error">
-              {error}
+              Your credentials are not okay
             </MuiAlert>
-          </Snackbar> */}
+          </Snackbar>
         </Container>
       </Box>
     </>
