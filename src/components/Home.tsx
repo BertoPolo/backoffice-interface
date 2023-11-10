@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { Container, Card, CardContent, Typography, CardMedia, TextField, Button, Alert } from "@mui/material/"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { Container, Card, CardContent, Typography, CardMedia, Grid, IconButton, TextField, Button, Alert } from "@mui/material/"
+import EditIcon from "@mui/icons-material/Edit"
+import DeleteIcon from "@mui/icons-material/Delete"
 // import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
 import { IUser, loginState } from "@/types"
 import { removeToken, logOut } from "../slices/loginSlice"
@@ -79,10 +81,18 @@ const Home = () => {
     setFilteredUsers(matchedUsers)
   }
 
+  const handleEditUser = (userId: number) => {
+    console.log("Edit user with ID:", userId)
+    //  edit
+  }
+
+  const handleDeleteUser = (userId: number) => {
+    console.log("Delete user with ID:", userId)
+    //  delete
+  }
+
   return (
     <>
-      {/* {isError && <Alert severity="error">This is an error alert — check it out!</Alert>} */}
-
       {token ? (
         <Container maxWidth="md">
           <TextField
@@ -97,22 +107,31 @@ const Home = () => {
             Search
           </Button>
 
-          {error && <Alert severity="error">{error}</Alert>}
-
-          {/* Users list */}
-          {filteredUsers.map((user: any) => (
-            <Card key={user.id} style={{ margin: "10px 0" }}>
-              <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {user.first_name} {user.last_name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {user.email}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
+          <Grid container spacing={2}>
+            {filteredUsers.map((user) => (
+              <Grid item xs={12} sm={6} md={4} key={user.id}>
+                <Card style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {user.first_name} {user.last_name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {user.email}
+                    </Typography>
+                  </CardContent>
+                  <div>
+                    <IconButton onClick={() => handleEditUser(user.id)}>
+                      <EditIcon color="primary" />
+                    </IconButton>
+                    <IconButton onClick={() => handleDeleteUser(user.id)}>
+                      <DeleteIcon color="secondary" />
+                    </IconButton>
+                  </div>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
 
           {/* Pagination buttons */}
           <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
