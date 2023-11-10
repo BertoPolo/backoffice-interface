@@ -5,7 +5,7 @@ import Login from "./components/Login"
 import Home from "./components/Home"
 import Navbar from "./components/Navbar"
 import ProtectedRoute from "./components/ProtectedRoute"
-// import { darkTheme, lightTheme } from "../themes/themes"
+import { darkTheme, lightTheme } from "./themes/themes"
 
 const App: React.FC = () => {
   const [themeMode, setThemeMode] = useState<"light" | "dark">(localStorage.getItem("themeMode") === "dark" ? "dark" : "light")
@@ -14,11 +14,7 @@ const App: React.FC = () => {
     localStorage.setItem("themeMode", themeMode)
   }, [themeMode])
 
-  const currentTheme = createTheme({
-    palette: {
-      mode: themeMode,
-    },
-  })
+  const currentTheme = themeMode === "light" ? lightTheme : darkTheme
 
   const handleThemeChange = () => {
     setThemeMode(themeMode === "light" ? "dark" : "light")
