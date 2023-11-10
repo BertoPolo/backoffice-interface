@@ -18,8 +18,8 @@ const Home = () => {
   const [users, setUsers] = useState<IUser[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
-  const [totalUsers, setTotalUsers] = useState(0) // Total number of users retrieved from API
-  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0) // Total number pages you can retrieve from API in this search
+  const [page, setPage] = useState(1) //current page
   const [error, setError] = useState("")
 
   const fetchUsers = async () => {
@@ -33,15 +33,13 @@ const Home = () => {
       const data = await response.json()
       setUsers(data.data)
       setFilteredUsers(data.data)
-      setTotalUsers(data.total)
+      setTotalPages(data.total_pages)
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to fetch users")
     }
   }
 
-  const isLastPage = page * 6 >= totalUsers
-
-  const handleWindowClose = (event: any) => {
+  const handleWindowClose = (event: BeforeUnloadEvent) => {
     // change ANY type
     dispatch(removeToken(""))
     dispatch(logOut(false))
@@ -78,7 +76,6 @@ const Home = () => {
     } else {
       setError("")
     }
-
     setFilteredUsers(matchedUsers)
   }
 
@@ -165,10 +162,10 @@ const Home = () => {
           </Grid>
 
           {/* Pagination buttons */}
-          <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
+          <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page >= 1}>
             Previous
           </Button>
-          <Button onClick={() => setPage((prev) => prev + 1)} disabled={isLastPage || filteredUsers.length <= 1}>
+          <Button onClick={() => setPage((prev) => prev + 1)} disabled={page >= totalPages}>
             Next
           </Button>
         </Container>
