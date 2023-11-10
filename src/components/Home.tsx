@@ -12,7 +12,10 @@ const Home = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`https://reqres.in/api/users?page=${page}&per_page=6`)
+        const response = await fetch(`https://reqres.in/api/users?page=${page}&per_page=6`, {
+          headers: { token: token },
+        })
+
         const data = await response.json()
         setUsers(data.data)
         setFilteredUsers(data.data)
