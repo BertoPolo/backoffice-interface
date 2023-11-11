@@ -1,7 +1,24 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { Container, Card, CardContent, Typography, CardMedia, Box, Grid, IconButton, TextField, Button, Alert, InputAdornment } from "@mui/material/"
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Box,
+  Grid,
+  IconButton,
+  TextField,
+  Dialog,
+  Button,
+  Alert,
+  InputAdornment,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 import SearchIcon from "@mui/icons-material/Search"
@@ -19,12 +36,17 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
   const [totalPages, setTotalPages] = useState(0) // Total number pages you can retrieve from API in this search
-  const [page, setPage] = useState(1) //current page
-  const [error, setError] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+
+  const [selectedUserId, setSelectedUserId] = useState(0)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`https://reqres.in/api/users?page=${page}&per_page=6`, {
+      const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
         headers: { token: token },
       })
       if (!response.ok) {
@@ -35,19 +57,18 @@ const Home = () => {
       setFilteredUsers(data.data)
       setTotalPages(data.total_pages)
     } catch (error) {
-      setError(error instanceof Error ? error.message : "Failed to fetch users")
+      setErrorMessage(error instanceof Error ? error.message : "Failed to fetch users")
     }
   }
 
   const handleWindowClose = (event: BeforeUnloadEvent) => {
-    // change ANY type
     dispatch(removeToken(""))
     dispatch(logOut(false))
   }
 
   useEffect(() => {
     fetchUsers()
-  }, [page])
+  }, [currentPage])
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleWindowClose)
@@ -60,7 +81,7 @@ const Home = () => {
   const handleSearch = () => {
     if (!searchTerm.trim()) {
       setFilteredUsers(users)
-      setError("")
+      setErrorMessage("")
       return
     }
 
@@ -72,17 +93,17 @@ const Home = () => {
     )
 
     if (matchedUsers.length === 0) {
-      setError("No users found")
+      setErrorMessage("No users found")
     } else {
-      setError("")
+      setErrorMessage("")
     }
     setFilteredUsers(matchedUsers)
   }
 
-  const handleEditUser = async (userId: number) => {
+  const EditUser = async () => {
     try {
-      console.log("Edit user with ID:", userId)
-      const response = await fetch(`https://reqres.in/api/users/${userId}`, {
+      console.log("Edit user with ID:", selectedUserId)
+      const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -172,7 +193,12 @@ const Home = () => {
                     </Typography>
                   </CardContent>
                   <div>
-                    <IconButton onClick={() => handleEditUser(user.id)}>
+                    <IconButton
+                      onClick={() => {
+                        setSelectedUserId(user.id)
+                        setIsEditModalOpen(true)
+                      }}
+                    >
                       <EditIcon color="secondary" />
                     </IconButton>
                     <IconButton onClick={() => handleDeleteUser(user.id)}>
@@ -182,19 +208,55 @@ const Home = () => {
                 </Card>
               </Grid>
             ))}
-            {filteredUsers.length === 0 && <Alert severity="error">no users found</Alert>}
+            {filteredUsers.length === 0 && <Alert severity="error">No users found</Alert>}
           </Grid>
 
           {/* Pagination buttons */}
-          <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
+          <Button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
             Previous
           </Button>
-          <Button onClick={() => setPage((prev) => prev + 1)} disabled={page >= totalPages}>
+          <Button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={currentPage >= totalPages}>
             Next
           </Button>
+
+          {/* move this modal to a separate component and manage it with redux */}
+          <Dialog open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+            <DialogTitle>Edit User</DialogTitle>
+            <DialogContent>
+              {/* Text Fields for User Data */}
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Name"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <TextField
+                margin="dense"
+                id="email"
+                label="Email"
+                type="email"
+                fullWidth
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {/* Add more fields as needed */}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setIsEditModalOpen(false)} color="error">
+                Cancel
+              </Button>
+              <Button onClick={EditUser}>Save</Button>
+            </DialogActions>
+          </Dialog>
         </Container>
       ) : (
-        // if you you dont have an access token
+        // if you you dont have an access token. this should never happen
         <>
           <Alert severity="error">you need to be logged</Alert> <Button onClick={() => navigate("/login")}>Back</Button>
         </>
