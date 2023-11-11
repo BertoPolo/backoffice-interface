@@ -79,20 +79,44 @@ const Home = () => {
     setFilteredUsers(matchedUsers)
   }
 
-  const handleEditUser = (userId: number) => {
-    console.log("Edit user with ID:", userId)
-    //  edit
+  const handleEditUser = async (userId: number) => {
+    try {
+      console.log("Edit user with ID:", userId)
+      const response = await fetch(`https://reqres.in/api/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify("updatedUserData"), // change this for the new input.
+      })
+      const data = await response.json()
+      console.log(data)
+    } catch (error) {
+      console.error("Error editing user:", error)
+    }
   }
 
-  const handleDeleteUser = (userId: number) => {
-    console.log("Delete user with ID:", userId)
-    //  delete
+  //check
+  const handleDeleteUser = async (userId: number) => {
+    try {
+      console.log("Delete user with ID:", userId)
+      const response = await fetch(`https://reqres.in/api/users/${userId}`, {
+        method: "DELETE",
+      })
+      if (response.ok) {
+        console.log("User deleted successfully")
+      } else {
+        console.error("Failed to delete user")
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error)
+    }
   }
 
   return (
     <>
       {token ? (
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ bgcolor: "background.default" }}>
           <Box display="flex" alignItems="center" gap={1}>
             <TextField
               placeholder="Search Users"
@@ -149,10 +173,10 @@ const Home = () => {
                   </CardContent>
                   <div>
                     <IconButton onClick={() => handleEditUser(user.id)}>
-                      <EditIcon color="primary" />
+                      <EditIcon color="secondary" />
                     </IconButton>
                     <IconButton onClick={() => handleDeleteUser(user.id)}>
-                      <DeleteIcon color="secondary" />
+                      <DeleteIcon color="error" />
                     </IconButton>
                   </div>
                 </Card>
@@ -162,7 +186,7 @@ const Home = () => {
           </Grid>
 
           {/* Pagination buttons */}
-          <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page >= 1}>
+          <Button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
             Previous
           </Button>
           <Button onClick={() => setPage((prev) => prev + 1)} disabled={page >= totalPages}>
