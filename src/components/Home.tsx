@@ -41,8 +41,16 @@ const Home = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const [selectedUserId, setSelectedUserId] = useState(0)
-  const [name, setName] = useState("")
+
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
+
+  const resetModalStates = () => {
+    setFirstName("")
+    setLastName("")
+    setEmail("")
+  }
 
   const fetchUsers = async () => {
     try {
@@ -100,24 +108,30 @@ const Home = () => {
     setFilteredUsers(matchedUsers)
   }
 
-  const EditUser = async () => {
+  const editUser = async () => {
     try {
-      console.log("Edit user with ID:", selectedUserId)
+      // console.log("Edit user with ID:", selectedUserId)
       const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          token: token,
         },
-        body: JSON.stringify("updatedUserData"), // change this for the new input.
+        body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email }),
       })
-      const data = await response.json()
-      console.log(data)
+
+      if (response.ok) {
+        // const data = await response.json()
+        // console.log(data)
+        fetchUsers()
+        setIsEditModalOpen(false)
+        resetModalStates()
+      }
     } catch (error) {
       console.error("Error editing user:", error)
     }
   }
 
-  //check
   const handleDeleteUser = async (userId: number) => {
     try {
       console.log("Delete user with ID:", userId)
@@ -126,6 +140,7 @@ const Home = () => {
       })
       if (response.ok) {
         console.log("User deleted successfully")
+        fetchUsers()
       } else {
         console.error("Failed to delete user")
       }
@@ -196,6 +211,9 @@ const Home = () => {
                     <IconButton
                       onClick={() => {
                         setSelectedUserId(user.id)
+                        setFirstName(user.first_name)
+                        setLastName(user.last_name)
+                        setEmail(user.email)
                         setIsEditModalOpen(true)
                       }}
                     >
@@ -232,8 +250,19 @@ const Home = () => {
                 type="text"
                 fullWidth
                 variant="outlined"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Name"
+                type="text"
+                fullWidth
+                variant="outlined"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
               <TextField
                 margin="dense"
@@ -251,7 +280,7 @@ const Home = () => {
               <Button onClick={() => setIsEditModalOpen(false)} color="error">
                 Cancel
               </Button>
-              <Button onClick={EditUser}>Save</Button>
+              <Button onClick={editUser}>Save</Button>
             </DialogActions>
           </Dialog>
         </Container>
