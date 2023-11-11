@@ -72,6 +72,10 @@ const LoginPage = () => {
           <Button variant="contained" color="primary" onClick={handleLogin} fullWidth>
             Login
           </Button>
+
+          <Button variant="contained" color="warning" onClick={() => navigate("/register")} fullWidth>
+            First time here?
+          </Button>
         </Container>
       </Box>
 
