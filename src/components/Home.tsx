@@ -24,7 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import SearchIcon from "@mui/icons-material/Search"
 // import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
 import { IUser, loginState } from "@/types"
-import { removeToken, logOut } from "../slices/loginSlice"
+import { removeToken, logIn } from "../slices/loginSlice"
 
 const Home = () => {
   const token = useSelector((state: loginState) => state.loginSlice.token)
@@ -37,7 +37,6 @@ const Home = () => {
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
   const [totalPages, setTotalPages] = useState(0) // Total number pages you can retrieve from API in this search
   const [currentPage, setCurrentPage] = useState(1)
-  const [errorMessage, setErrorMessage] = useState("")
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const [selectedUserId, setSelectedUserId] = useState(0)
@@ -65,13 +64,13 @@ const Home = () => {
       setFilteredUsers(data.data)
       setTotalPages(data.total_pages)
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Failed to fetch users")
+      console.error("Error fetching users: ", error)
     }
   }
 
   const handleWindowClose = (event: BeforeUnloadEvent) => {
     dispatch(removeToken(""))
-    dispatch(logOut(false))
+    dispatch(logIn(false))
   }
 
   useEffect(() => {
@@ -89,22 +88,16 @@ const Home = () => {
   const handleSearch = () => {
     if (!searchTerm.trim()) {
       setFilteredUsers(users)
-      setErrorMessage("")
       return
     }
 
+    // search users and set'em to FilteredUsers
     const matchedUsers = users.filter(
       (user) =>
         user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     )
-
-    if (matchedUsers.length === 0) {
-      setErrorMessage("No users found")
-    } else {
-      setErrorMessage("")
-    }
     setFilteredUsers(matchedUsers)
   }
 
@@ -194,6 +187,7 @@ const Home = () => {
             />
           </Box>
 
+          {/* move this grid to a separate component */}
           <Grid container spacing={2}>
             {filteredUsers.map((user) => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
