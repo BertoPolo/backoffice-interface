@@ -219,7 +219,11 @@ const Home = () => {
                     >
                       <EditIcon color="secondary" />
                     </IconButton>
-                    <IconButton onClick={() => handleDeleteUser(user.id)}>
+                    <IconButton
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this user? ")) handleDeleteUser(user.id)
+                      }}
+                    >
                       <DeleteIcon color="error" />
                     </IconButton>
                   </div>
