@@ -1,36 +1,52 @@
 import React, { FormEventHandler, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Container, TextField, Button, Typography, Paper, Alert } from "@mui/material"
 import { IFormData } from "@/types"
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState<IFormData>({
     username: "",
     email: "",
     password: "",
   })
+  const [confirmPassword, setConfirmPassword] = useState<string>("")
   // confirmPassword: "",
 
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // Handle input change
+  // modify input before being sent to the server
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  // Handle form submit
+  // form submit
   const registration: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    setError("")
-    setSuccess("")
-
-    if (formData.password === confirmPassword)
+    if (formData.password === confirmPassword) {
       try {
-        setSuccess("Registration successful!")
+        const response = await fetch("https://reqres.in/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        } else {
+          // dispatch(addToken(data.token))
+          setSuccess("Registration successful!")
+          // navigate("/users")
+        }
       } catch (error) {
         console.error("Registration error:", error)
         setError("Failed to register. Please try again.")
       }
+    } else setError("Check your password, seems it doesn't match with the confirmation one")
   }
 
   return (
@@ -73,7 +89,7 @@ const Register = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          {/* <TextField
+          <TextField
             variant="outlined"
             margin="normal"
             required
@@ -81,9 +97,9 @@ const Register = () => {
             name="confirmPassword"
             label="Confirm Password"
             type="password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          /> */}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: 24 }}>
             Register
           </Button>
