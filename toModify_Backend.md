@@ -1,0 +1,3 @@
+- when you log in, it accepts ANY password, only checks email
+- requirements for registration doesn't match with what will be displayed from user
+- if username is not an email address, doesn't let you register but email is not needed to be

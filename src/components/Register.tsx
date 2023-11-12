@@ -12,10 +12,9 @@ const Register = () => {
     password: "",
   })
   const [confirmPassword, setConfirmPassword] = useState<string>("")
-  // confirmPassword: "",
-
-  const [error, setError] = useState<string>("")
-  const [success, setSuccess] = useState<string>("")
+  //could be unified in 1
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [successMessage, setSuccessMessage] = useState<string>("")
 
   // modify input before being sent to the server
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,14 +38,14 @@ const Register = () => {
           throw new Error(`HTTP error! status: ${response.status}`)
         } else {
           // dispatch(addToken(data.token))
-          setSuccess("Registration successful!")
+          setSuccessMessage("Registration successful!")
           // navigate("/users")
         }
       } catch (error) {
         console.error("Registration error:", error)
-        setError("Failed to register. Please try again.")
+        setErrorMessage("Failed to register. Please try again.")
       }
-    } else setError("Check your password, seems it doesn't match with the confirmation one")
+    } else setErrorMessage("Check your password, seems it doesn't match with the confirmation one")
   }
 
   return (
@@ -55,8 +54,8 @@ const Register = () => {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        {error && <Alert severity="error">{error}</Alert>}
-        {success && <Alert severity="success">{success}</Alert>}
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+        {successMessage && <Alert severity="success">{successMessage}</Alert>}
         <form onSubmit={registration}>
           <TextField
             variant="outlined"
