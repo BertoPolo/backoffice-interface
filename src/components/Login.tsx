@@ -2,7 +2,7 @@ import React, { useState, SyntheticEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container, Box, Snackbar } from "@mui/material/"
 import MuiAlert from "@mui/material/Alert"
-import { addToken, logIn } from "../slices/loginSlice"
+import { addToken } from "../slices/loginSlice"
 import { useSelector, useDispatch } from "react-redux"
 import { loginState } from "@/types"
 
@@ -42,7 +42,6 @@ const LoginPage = () => {
       }
       const data = await response.json()
       dispatch(addToken(data.token))
-      dispatch(logIn(true))
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)

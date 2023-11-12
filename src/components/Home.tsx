@@ -24,7 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import SearchIcon from "@mui/icons-material/Search"
 // import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
 import { IUser, loginState } from "@/types"
-import { removeToken, logIn } from "../slices/loginSlice"
+import { removeToken } from "../slices/loginSlice"
 
 const Home = () => {
   const token = useSelector((state: loginState) => state.loginSlice.token)
@@ -70,7 +70,6 @@ const Home = () => {
 
   const handleWindowClose = (event: BeforeUnloadEvent) => {
     dispatch(removeToken(""))
-    dispatch(logIn(false))
   }
 
   useEffect(() => {

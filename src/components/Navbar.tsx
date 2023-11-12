@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
-import { logIn, removeToken } from "../slices/loginSlice"
+import { removeToken } from "../slices/loginSlice"
 import { loginState } from "@/types"
 
 const Navbar = () => {
@@ -29,7 +29,6 @@ const Navbar = () => {
               color="inherit"
               onClick={() => {
                 dispatch(removeToken(""))
-                dispatch(logIn(false))
                 navigate("/")
               }}
             >

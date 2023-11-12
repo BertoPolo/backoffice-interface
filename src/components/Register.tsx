@@ -1,10 +1,14 @@
 import React, { FormEventHandler, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, TextField, Button, Typography, Paper, Alert } from "@mui/material"
-import { IFormData } from "@/types"
+import { IFormData, loginState } from "@/types"
+import { useSelector, useDispatch } from "react-redux"
+import { addToken } from "../slices/loginSlice"
 
 const Register = () => {
   const navigate = useNavigate()
+  const token = useSelector((state: loginState) => state.loginSlice.token)
+  const dispatch = useDispatch()
 
   const [formData, setFormData] = useState<IFormData>({
     username: "",
@@ -12,9 +16,7 @@ const Register = () => {
     password: "",
   })
   const [confirmPassword, setConfirmPassword] = useState<string>("")
-  //could be unified in 1
   const [errorMessage, setErrorMessage] = useState<string>("")
-  const [successMessage, setSuccessMessage] = useState<string>("")
 
   // modify input before being sent to the server
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +39,9 @@ const Register = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         } else {
-          // dispatch(addToken(data.token))
-          setSuccessMessage("Registration successful!")
-          // navigate("/users")
+          const data = await response.json()
+          dispatch(addToken(data.token))
+          navigate("/users")
         }
       } catch (error) {
         console.error("Registration error:", error)
@@ -55,7 +57,6 @@ const Register = () => {
           Register
         </Typography>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-        {successMessage && <Alert severity="success">{successMessage}</Alert>}
         <form onSubmit={registration}>
           <TextField
             variant="outlined"

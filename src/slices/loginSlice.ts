@@ -11,6 +11,7 @@ const loginSlice = createSlice({
       return {
         ...state,
         token: action.payload,
+        isLogged: true,
       }
     },
 
@@ -18,15 +19,16 @@ const loginSlice = createSlice({
       return {
         ...state,
         token: action.payload,
+        isLogged: false,
       }
     },
 
-    logIn: (state, action) => {
-      return {
-        ...state,
-        isLogged: action.payload,
-      }
-    },
+    // logIn: (state, action) => {
+    //   return {
+    //     ...state,
+    //     isLogged: action.payload,
+    //   }
+    // },
 
     // logOut: (state, action) => {
     //   return {
@@ -38,4 +40,4 @@ const loginSlice = createSlice({
 })
 
 export default loginSlice.reducer
-export const { addToken, removeToken, logIn } = loginSlice.actions
+export const { addToken, removeToken } = loginSlice.actions
