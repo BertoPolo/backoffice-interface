@@ -26,7 +26,10 @@ const Navbar = () => {
           </Typography>
           {isLogged ? (
             <Button
-              color="inherit"
+              color="error"
+              size="small"
+              variant="outlined"
+              sx={{ fontSize: "0.7rem" }}
               onClick={() => {
                 dispatch(removeToken(""))
                 navigate("/")
@@ -35,7 +38,7 @@ const Navbar = () => {
               Log Out
             </Button>
           ) : (
-            <Button color="inherit" onClick={() => navigate("/")}>
+            <Button color="success" size="small" variant="outlined" sx={{ fontSize: "0.7rem" }} onClick={() => navigate("/")}>
               log In
             </Button>
           )}

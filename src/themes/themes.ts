@@ -1,5 +1,26 @@
 import { createTheme } from "@mui/material/styles"
 
+//  mytheme: {
+
+//  "primary": "#1d6c91",
+
+//  "secondary": "#a0ffe8",
+
+//  "accent": "#73e855",
+
+//  "neutral": "#141824",
+
+//  "base-100": "#ededee",
+
+//  "info": "#81b8df",
+
+//  "success": "#1ca08a",
+
+//  "warning": "#ca6e0c",
+
+//  "error": "#f41027",
+//           },
+
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -34,27 +55,6 @@ export const lightTheme = createTheme({
     fontFamily: "'Space Mono', monospace",
   },
 })
-
-//  mytheme: {
-
-//  "primary": "#1d6c91",
-
-//  "secondary": "#a0ffe8",
-
-//  "accent": "#73e855",
-
-//  "neutral": "#141824",
-
-//  "base-100": "#ededee",
-
-//  "info": "#81b8df",
-
-//  "success": "#1ca08a",
-
-//  "warning": "#ca6e0c",
-
-//  "error": "#f41027",
-//           },
 
 export const darkTheme = createTheme({
   palette: {

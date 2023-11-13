@@ -56,7 +56,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight={`calc(100vh - 64px)`}>
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight={`calc(90vh - 64px)`}>
         <Container maxWidth="xs">
           <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
           <TextField
@@ -70,13 +70,13 @@ const LoginPage = () => {
           />
 
           <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
-            <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "40%" }} disabled={!password || !email}>
+            <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !email}>
               Login
             </Button>
           </Box>
 
           <Box textAlign="center" sx={{ width: "100%" }}>
-            <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "40%" }}>
+            <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "45%" }}>
               First time here?
             </Button>
           </Box>
