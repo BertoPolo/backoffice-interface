@@ -144,7 +144,8 @@ const Home = () => {
   return (
     <>
       {token ? (
-        <Container maxWidth="md" sx={{ bgcolor: "background.default" }}>
+        <Container maxWidth="md">
+          {/* sx={{ bgcolor: "background.default" }} */}
           <Box display="flex" alignItems="center" gap={1}>
             <TextField
               placeholder="Search Users"
