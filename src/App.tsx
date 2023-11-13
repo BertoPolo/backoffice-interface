@@ -25,7 +25,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={currentTheme}>
-        <Box sx={{ bgcolor: "background.default" }}>
+        <Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
           <Navbar />
           <Switch checked={themeMode === "dark"} onChange={handleThemeChange} />
 

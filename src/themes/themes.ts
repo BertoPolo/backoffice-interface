@@ -30,9 +30,9 @@ export const lightTheme = createTheme({
       secondary: "rgba(0, 0, 0, 0.54)",
     },
   },
-  // typography: {
-  //   fontFamily: '"Press Start 2P", cursive',
-  // },
+  typography: {
+    fontFamily: "'Space Mono', monospace",
+  },
 })
 
 //  mytheme: {
@@ -85,6 +85,9 @@ export const darkTheme = createTheme({
       primary: "#ffffff",
       secondary: "202b32",
     },
+  },
+  typography: {
+    fontFamily: "'Space Mono', monospace",
   },
 })
 
