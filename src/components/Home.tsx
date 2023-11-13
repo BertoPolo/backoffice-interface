@@ -198,7 +198,7 @@ const Home = () => {
                   style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
                   elevation={5}
                   sx={(theme) => ({
-                    bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#0490e9",
+                    bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
                   })}
                 >
                   <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />

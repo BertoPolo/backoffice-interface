@@ -40,11 +40,11 @@ export const lightTheme = createTheme({
       main: "#ca6e0c",
     },
     error: {
-      main: "#f41027",
+      main: "#f41027ba",
     },
     background: {
       default: "#ededee",
-      paper: "#ffffff",
+      paper: "#81b8df",
     },
     text: {
       primary: "#141824",
