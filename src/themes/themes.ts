@@ -90,19 +90,3 @@ export const darkTheme = createTheme({
     fontFamily: "'Space Mono', monospace",
   },
 })
-
-// primary: "#b3ea85",
-// secondary:"#74abcc",
-
-//  "neutral": "#202b32",
-
-//  "base-100": "#21384a",
-
-//  "info": "#4f82c9",
-
-//  "success": "#1db478",
-
-//  "warning": "#ceaa09",
-
-//  "error": "#dd223e",
-//           }

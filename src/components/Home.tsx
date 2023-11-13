@@ -194,7 +194,13 @@ const Home = () => {
           <Grid container spacing={4}>
             {filteredUsers.map((user) => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
-                <Card style={{ display: "flex", flexDirection: "column", alignItems: "center" }} elevation={5}>
+                <Card
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+                  elevation={5}
+                  sx={(theme) => ({
+                    bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#0490e9",
+                  })}
+                >
                   <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -214,7 +220,7 @@ const Home = () => {
                         setIsEditModalOpen(true)
                       }}
                     >
-                      <EditIcon color="secondary" />
+                      <EditIcon color="primary" />
                     </IconButton>
                     <IconButton
                       onClick={() => {
