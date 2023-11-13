@@ -231,10 +231,10 @@ const Home = () => {
           </Grid>
 
           {/* Pagination buttons */}
-          <Button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+          <Button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} sx={{ mt: "1.2rem", mb: "1.5rem" }}>
             Previous
           </Button>
-          <Button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={currentPage >= totalPages}>
+          <Button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={currentPage >= totalPages} sx={{ mt: "1.2rem", mb: "1.5rem" }}>
             Next
           </Button>
 
