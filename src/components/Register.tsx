@@ -1,6 +1,6 @@
 import React, { FormEventHandler, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Container, TextField, Button, Typography, Paper, Alert } from "@mui/material"
+import { Container, TextField, Button, Typography, Paper, Alert, Box } from "@mui/material"
 import { IFormData, loginState } from "@/types"
 import { useSelector, useDispatch } from "react-redux"
 import { addToken } from "../slices/loginSlice"
@@ -77,6 +77,7 @@ const Register = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            sx={{ my: "0.5rem" }}
           />
           <TextField
             variant="outlined"
@@ -88,6 +89,7 @@ const Register = () => {
             type="password"
             value={formData.password}
             onChange={handleChange}
+            sx={{ my: "0.5rem" }}
           />
           <TextField
             variant="outlined"
@@ -99,10 +101,13 @@ const Register = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            sx={{ my: "0.5rem" }}
           />
-          <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: 24 }}>
-            Register
-          </Button>
+          <Box textAlign="center" sx={{ width: "100%" }}>
+            <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: 24, width: "40%" }}>
+              Register
+            </Button>
+          </Box>
         </form>
       </Paper>
     </Container>

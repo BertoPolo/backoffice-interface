@@ -57,7 +57,7 @@ const LoginPage = () => {
   return (
     <>
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="90vh">
-        <Container maxWidth="xs" className="login-container">
+        <Container maxWidth="xs">
           <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
           <TextField
             label="Password"
