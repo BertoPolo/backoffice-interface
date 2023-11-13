@@ -68,13 +68,18 @@ const LoginPage = () => {
             fullWidth
             margin="normal"
           />
-          <Button variant="contained" color="primary" onClick={handleLogin} fullWidth>
-            Login
-          </Button>
 
-          <Button variant="contained" color="warning" onClick={() => navigate("/register")} fullWidth>
-            First time here?
-          </Button>
+          <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
+            <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "40%" }}>
+              Login
+            </Button>
+          </Box>
+
+          <Box textAlign="center" sx={{ width: "100%" }}>
+            <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "40%" }}>
+              First time here?
+            </Button>
+          </Box>
         </Container>
       </Box>
 

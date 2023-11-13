@@ -145,7 +145,6 @@ const Home = () => {
     <>
       {token ? (
         <Container maxWidth="md">
-          {/* sx={{ bgcolor: "background.default" }} */}
           <Box display="flex" alignItems="center" gap={1}>
             <TextField
               placeholder="Search Users"
@@ -162,17 +161,16 @@ const Home = () => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                style: {
-                  borderRadius: "20px", // Rounded corners
-                },
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleSearch()
                 }
               }}
-              sx={{
+              sx={(theme) => ({
                 "& .MuiOutlinedInput-root": {
+                  borderRadius: "20px", // Rounded corners
+                  backgroundColor: theme.palette.mode === "dark" ? "#21384a" : "#ededee",
                   "& fieldset": {
                     borderWidth: "0", // Removes border
                   },
@@ -183,15 +181,20 @@ const Home = () => {
                     borderWidth: "0", // Removes border on focus
                   },
                 },
-              }}
+                mb: "2rem",
+                boxShadow:
+                  theme.palette.mode === "dark"
+                    ? "0px 3px 6px rgba(0, 0, 0, 0.16)" // Shadow for dark mode
+                    : "0px 3px 6px rgba(0, 0, 0, 0.1)", // Lighter shadow for light mode
+              })}
             />
           </Box>
 
           {/* move this grid to a separate component */}
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             {filteredUsers.map((user) => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
-                <Card style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Card style={{ display: "flex", flexDirection: "column", alignItems: "center" }} elevation={5}>
                   <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
