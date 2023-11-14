@@ -211,7 +211,14 @@ const Home = () => {
             {filteredUsers.map((user) => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
                 <Card
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    minHeight: "300px",
+                    maxHeight: "300px",
+                    justifyContent: "space-between",
+                  }}
                   elevation={5}
                   className={`fade-in ${isActive ? "active" : ""}`}
                   sx={(theme) => ({
