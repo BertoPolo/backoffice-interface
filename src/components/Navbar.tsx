@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
 import { removeToken } from "../slices/loginSlice"
-import { loginState } from "@/types"
+import { loginState, NavbarProps } from "@/types"
 
-const Navbar = () => {
+const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const isLogged = useSelector((state: loginState) => state.loginSlice.isLogged)
 
   const dispatch = useDispatch()
@@ -24,6 +24,9 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Alberto's Assessment
           </Typography>
+
+          {children}
+
           {isLogged ? (
             <Button
               color="error"

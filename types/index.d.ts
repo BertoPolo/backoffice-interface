@@ -17,3 +17,10 @@ export interface IFormData {
   email: string
   password: string
 }
+export interface NavbarProps {
+  children: React.ReactNode
+}
+
+export interface ProtectedRouteProps {
+  children: React.ReactNode
+}

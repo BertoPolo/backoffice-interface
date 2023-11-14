@@ -56,7 +56,12 @@ const LoginPage = () => {
 
   return (
     <>
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight={`calc(90vh - 64px)`}>
+      {/* <Box sx={{ display: "flex", flexDirection: "row" }}>
+        {/* left part, blank container */}
+      {/* <Box className="login-blank-container">eewe</Box>  */}
+
+      {/* Right part, login containter */}
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight={`calc(90vh - 64px)`} className="login-form-container">
         <Container maxWidth="xs">
           <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
           <TextField
@@ -92,6 +97,7 @@ const LoginPage = () => {
           </Snackbar>
         </Container>
       </Box>
+      {/* </Box> */}
     </>
   )
 }
