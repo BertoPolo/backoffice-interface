@@ -22,7 +22,8 @@ import {
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 import SearchIcon from "@mui/icons-material/Search"
-// import { addId, addEmail, addFirstName, addLastName, addAvatar } from "../slices/usersSlice"
+import CloseIcon from "@mui/icons-material/Close"
+
 import { IUser, loginState } from "@/types"
 import { removeToken } from "../slices/loginSlice"
 
@@ -174,6 +175,13 @@ const Home = () => {
                   <InputAdornment position="start">
                     <IconButton onClick={handleSearch} edge="start" onKeyDown={handleSearch}>
                       <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                endAdornment: searchTerm && (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setSearchTerm("")}>
+                      <CloseIcon />
                     </IconButton>
                   </InputAdornment>
                 ),
