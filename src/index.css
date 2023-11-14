@@ -23,10 +23,15 @@ body {
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
+
 /*  */
 .login-blank-container {
-  /* background-image: url("process.public/login-blank.avif"); */
+  background-image: url("/data/login-blank.avif");
+  background-size: cover;
+  background-position: center;
 }
 .login-form-container {
-  /* background-image: url("process.public/container-login-bg.avif"); */
+  /* background-image: url("/data/container-login-bg.avif"); */
+  background-size: cover;
+  background-position: center;
 }

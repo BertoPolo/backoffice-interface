@@ -56,48 +56,49 @@ const LoginPage = () => {
 
   return (
     <>
-      {/* <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box sx={{ display: "flex", flexDirection: "row", height: "100vh", width: "100vw" }}>
         {/* left part, blank container */}
-      {/* <Box className="login-blank-container">eewe</Box>  */}
+        <Box className="login-blank-container" sx={{ width: "50%", height: "100%" }}></Box>
 
-      {/* Right part, login containter */}
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight={`calc(90vh - 64px)`} className="login-form-container">
-        <Container maxWidth="xs">
-          <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
-          <TextField
-            label="Password"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
+        {/* Right part, login containter */}
+        <Box className="login-form-container" sx={{ width: "50%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Container maxWidth="xs">
+            <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
+            <TextField
+              label="Password"
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+              margin="normal"
+            />
 
-          <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
-            <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !email}>
-              Login
-            </Button>
+            <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
+              <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !email}>
+                Login
+              </Button>
+            </Box>
+
+            <Box textAlign="center" sx={{ width: "100%" }}>
+              <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "45%" }}>
+                First time here?
+              </Button>
+            </Box>
+          </Container>
+
+          {/* in case of error  */}
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Container maxWidth="xs">
+              <Snackbar open={openSnackbar} autoHideDuration={5000} onClose={handleCloseSnackbar}>
+                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="error">
+                  Your credentials are not okay
+                </MuiAlert>
+              </Snackbar>
+            </Container>
           </Box>
-
-          <Box textAlign="center" sx={{ width: "100%" }}>
-            <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "45%" }}>
-              First time here?
-            </Button>
-          </Box>
-        </Container>
+        </Box>
       </Box>
-
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Container maxWidth="xs">
-          <Snackbar open={openSnackbar} autoHideDuration={5000} onClose={handleCloseSnackbar}>
-            <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="error">
-              Your credentials are not okay
-            </MuiAlert>
-          </Snackbar>
-        </Container>
-      </Box>
-      {/* </Box> */}
     </>
   )
 }
