@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
@@ -7,25 +7,26 @@ import {
   CardContent,
   Typography,
   CardMedia,
-  Box,
+  // Box,
   Grid,
   IconButton,
   TextField,
   Dialog,
   Button,
   Alert,
-  InputAdornment,
+  // InputAdornment,
   DialogActions,
   DialogTitle,
   DialogContent,
 } from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
-import SearchIcon from "@mui/icons-material/Search"
-import CloseIcon from "@mui/icons-material/Close"
+// import SearchIcon from "@mui/icons-material/Search"
+// import CloseIcon from "@mui/icons-material/Close"
 
 import { IUser, loginState } from "@/types"
 import { removeToken } from "../slices/loginSlice"
+import SearchBar from "./SearchBar"
 
 const Home = () => {
   const token = useSelector((state: loginState) => state.loginSlice.token)
@@ -162,57 +163,7 @@ const Home = () => {
     <>
       {token ? (
         <Container maxWidth="md">
-          <Box display="flex" alignItems="center" gap={1}>
-            <TextField
-              placeholder="Search Users"
-              variant="outlined"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              fullWidth
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <IconButton onClick={handleSearch} edge="start" onKeyDown={handleSearch}>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-                endAdornment: searchTerm && (
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => setSearchTerm("")}>
-                      <CloseIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSearch()
-                }
-              }}
-              sx={(theme) => ({
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "20px", // Rounded corners
-                  backgroundColor: theme.palette.mode === "dark" ? "#21384a" : "#ededee",
-                  "& fieldset": {
-                    borderWidth: "0", // Removes border
-                  },
-                  "&:hover fieldset": {
-                    borderWidth: "0", // Removes border on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderWidth: "0", // Removes border on focus
-                  },
-                },
-                mb: "2rem",
-                boxShadow:
-                  theme.palette.mode === "dark"
-                    ? "0px 3px 6px rgba(0, 0, 0, 0.16)" // Shadow for dark mode
-                    : "0px 3px 6px rgba(0, 0, 0, 0.1)", // Lighter shadow for light mode
-              })}
-            />
-          </Box>
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
 
           {/* move this grid to a separate component */}
           <Grid container spacing={4} className="fade-in">
