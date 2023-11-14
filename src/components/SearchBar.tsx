@@ -56,8 +56,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, handle
           my: "2rem",
           boxShadow:
             theme.palette.mode === "dark"
-              ? "0px 3px 6px rgba(0, 0, 0, 0.16)" // Shadow for dark mode
-              : "0px 3px 6px rgba(0, 0, 0, 0.1)", // Lighter shadow for light mode
+              ? "0px 3px 6px rgba(0, 0, 0, 0.16)" //  dark mode
+              : "0px 3px 6px rgba(0, 0, 0, 0.1)", //  light mode
         })}
       />
     </Box>

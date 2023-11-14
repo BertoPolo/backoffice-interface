@@ -7,7 +7,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 
 const reducers = combineReducers({
   loginSlice: loginSlice,
-  // usersSlice: usersSlice,
+  // userSlice: userSlice,
 })
 
 const persistConfig = {

@@ -4,6 +4,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.mail {
+  font-family: "Roboto";
+}
+
 /* card animation */
 @keyframes fadeIn {
   from {

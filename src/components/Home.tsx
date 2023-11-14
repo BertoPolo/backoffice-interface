@@ -7,22 +7,18 @@ import {
   CardContent,
   Typography,
   CardMedia,
-  // Box,
   Grid,
   IconButton,
   TextField,
   Dialog,
   Button,
   Alert,
-  // InputAdornment,
   DialogActions,
   DialogTitle,
   DialogContent,
 } from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
-// import SearchIcon from "@mui/icons-material/Search"
-// import CloseIcon from "@mui/icons-material/Close"
 
 import { IUser, loginState } from "@/types"
 import { removeToken } from "../slices/loginSlice"
@@ -190,7 +186,7 @@ const Home = () => {
                       {user.first_name} {user.last_name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {user.email}
+                      <span className="mail"> {user.email}</span>
                     </Typography>
                   </CardContent>
                   <div>
