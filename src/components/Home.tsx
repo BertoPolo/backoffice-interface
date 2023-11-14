@@ -45,6 +45,8 @@ const Home = () => {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
 
+  const [isActive, setIsActive] = useState(false)
+
   const resetModalStates = () => {
     setFirstName("")
     setLastName("")
@@ -71,18 +73,6 @@ const Home = () => {
   const handleWindowClose = (event: BeforeUnloadEvent) => {
     dispatch(removeToken(""))
   }
-
-  useEffect(() => {
-    fetchUsers()
-  }, [currentPage])
-
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleWindowClose)
-
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowClose)
-    }
-  }, [])
 
   const handleSearch = () => {
     if (!searchTerm.trim()) {
@@ -141,6 +131,32 @@ const Home = () => {
     }
   }
 
+  function triggerFadeInAnimation() {
+    const elements = document.querySelectorAll(".fade-in")
+    elements.forEach((element) => {
+      const htmlElement = element as HTMLElement
+      htmlElement.classList.remove("active")
+
+      void htmlElement.offsetWidth
+
+      htmlElement.classList.add("active")
+    })
+  }
+
+  useEffect(() => {
+    fetchUsers()
+    triggerFadeInAnimation()
+  }, [currentPage])
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleWindowClose)
+    setIsActive(true)
+
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowClose)
+    }
+  }, [])
+
   return (
     <>
       {token ? (
@@ -191,12 +207,13 @@ const Home = () => {
           </Box>
 
           {/* move this grid to a separate component */}
-          <Grid container spacing={4}>
+          <Grid container spacing={4} className="fade-in">
             {filteredUsers.map((user) => (
               <Grid item xs={12} sm={6} md={4} key={user.id}>
                 <Card
                   style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
                   elevation={5}
+                  className={`fade-in ${isActive ? "active" : ""}`}
                   sx={(theme) => ({
                     bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
                   })}
@@ -244,7 +261,7 @@ const Home = () => {
             Next
           </Button>
 
-          {/* move this modal to a separate component and manage it with redux */}
+          {/* move this modal to a separate component*/}
           <Dialog open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
             <DialogTitle>Edit User</DialogTitle>
             <DialogContent>
