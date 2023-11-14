@@ -1,3 +1,4 @@
 - when you log in, it accepts ANY password, only checks email
 - requirements for registration doesn't match with what is required from an user
-- if username is not an email address, doesn't let you register but email is not needed to be
+- if username is not an email address, doesn't let you register but "email" is not needed to be
+- only allows to register eve.holt@reqres.in

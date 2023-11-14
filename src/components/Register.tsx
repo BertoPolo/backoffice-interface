@@ -51,7 +51,16 @@ const Register = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "90vh",
+      }}
+    >
       <Paper elevation={6} style={{ padding: 16 }}>
         <Typography component="h1" variant="h5">
           Register
