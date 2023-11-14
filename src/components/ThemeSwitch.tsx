@@ -14,7 +14,14 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ toggleTheme }) => {
   const isDarkMode = theme.palette.mode === "dark"
 
   return (
-    <IconButton onClick={toggleTheme}>
+    <IconButton
+      onClick={toggleTheme}
+      sx={{
+        "&:hover": {
+          backgroundColor: "transparent",
+        },
+      }}
+    >
       {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
       <Switch checked={isDarkMode} />
     </IconButton>
