@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault()
     if (formData.password === confirmPassword) {
       try {
-        const response = await fetch("https://reqres.in/api/register", {
+        // const response = await fetch("https://reqres.in/api/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

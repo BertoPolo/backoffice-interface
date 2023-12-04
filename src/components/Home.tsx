@@ -53,7 +53,7 @@ const Home = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
+      // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
         headers: { token: token },
       })
       if (!response.ok) {
@@ -91,7 +91,7 @@ const Home = () => {
   const editUser = async () => {
     try {
       // console.log("Edit user with ID:", selectedUserId)
-      const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
+      // const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const Home = () => {
   const handleDeleteUser = async (userId: number) => {
     try {
       console.log("Delete user with ID:", userId)
-      const response = await fetch(`https://reqres.in/api/users/${userId}`, {
+      // const response = await fetch(`https://reqres.in/api/users/${userId}`, {
         method: "DELETE",
       })
       if (response.ok) {

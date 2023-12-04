@@ -24,7 +24,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch("https://reqres.in/api/login", {
+      // const response = await fetch("https://reqres.in/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
