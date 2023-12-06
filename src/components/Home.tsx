@@ -51,9 +51,11 @@ const Home = () => {
     setEmail("")
   }
 
+
   const fetchUsers = async () => {
     try {
       // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
+      const response = await fetch(`process.env.REACT_APP_SERVER${}`, {
         headers: { token: token },
       })
       if (!response.ok) {
