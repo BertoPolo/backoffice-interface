@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
             </svg>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Alberto's Assessment
+            AlbertoPolo
           </Typography>
 
           {children}

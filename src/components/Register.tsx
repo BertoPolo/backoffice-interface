@@ -29,20 +29,19 @@ const Register = () => {
     if (formData.password === confirmPassword) {
       try {
         // const response = await fetch("https://reqres.in/api/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        } else {
-          const data = await response.json()
-          dispatch(addToken(data.token))
-          navigate("/users")
-        }
+        // method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(formData),
+        // })
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! status: ${response.status}`)
+        // } else {
+        //   const data = await response.json()
+        //   dispatch(addToken(data.token))
+        //   navigate("/users")
+        // }
       } catch (error) {
         console.error("Registration error:", error)
         setErrorMessage("Failed to register. Please try again.")

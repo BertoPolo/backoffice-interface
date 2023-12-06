@@ -51,11 +51,10 @@ const Home = () => {
     setEmail("")
   }
 
-
   const fetchUsers = async () => {
     try {
       // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
-      const response = await fetch(`process.env.REACT_APP_SERVER${}`, {
+      const response = await fetch("https://login.auth0.com/api/v2/users", {
         headers: { token: token },
       })
       if (!response.ok) {
@@ -94,21 +93,21 @@ const Home = () => {
     try {
       // console.log("Edit user with ID:", selectedUserId)
       // const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          token: token,
-        },
-        body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email }),
-      })
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     token: token,
+      //   },
+      //   body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email }),
+      // })
 
-      if (response.ok) {
-        // const data = await response.json()
-        // console.log(data)
-        fetchUsers()
-        setIsEditModalOpen(false)
-        resetModalStates()
-      }
+      // if (response.ok) {
+      // const data = await response.json()
+      // console.log(data)
+      fetchUsers()
+      setIsEditModalOpen(false)
+      resetModalStates()
+      // }
     } catch (error) {
       console.error("Error editing user:", error)
     }
@@ -118,14 +117,14 @@ const Home = () => {
     try {
       console.log("Delete user with ID:", userId)
       // const response = await fetch(`https://reqres.in/api/users/${userId}`, {
-        method: "DELETE",
-      })
-      if (response.ok) {
-        console.log("User deleted successfully")
-        fetchUsers()
-      } else {
-        console.error("Failed to delete user")
-      }
+      //   method: "DELETE",
+      // })
+      // if (response.ok) {
+      //   console.log("User deleted successfully")
+      //   fetchUsers()
+      // } else {
+      //   console.error("Failed to delete user")
+      // }
     } catch (error) {
       console.error("Error deleting user:", error)
     }

@@ -12,9 +12,9 @@ const UserDetails = () => {
       setLoading(true)
       try {
         // const response = await fetch(`https://reqres.in/api/users/${id}`)
-        if (!response.ok) throw new Error("User not found")
-        const data = await response.json()
-        setUser(data.data)
+        // if (!response.ok) throw new Error("User not found")
+        // const data = await response.json()
+        // setUser(data.data)
       } catch (error) {
         console.error(error)
       } finally {

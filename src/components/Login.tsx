@@ -25,23 +25,23 @@ const LoginPage = () => {
 
     try {
       // const response = await fetch("https://reqres.in/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      })
+      // method: "POST",
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      // body: JSON.stringify({
+      //   email,
+      //   password,
+      // }),
+      // })
 
-      if (!response.ok) {
-        setError("Your credentials are not okay")
-        setOpenSnackbar(true)
-        throw new Error("Login failed")
-      }
-      const data = await response.json()
-      dispatch(addToken(data.token))
+      // if (!response.ok) {
+      //   setError("Your credentials are not okay")
+      //   setOpenSnackbar(true)
+      //   throw new Error("Login failed")
+      // }
+      // const data = await response.json()
+      // dispatch(addToken(data.token))
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)
