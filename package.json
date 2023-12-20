@@ -1,5 +1,5 @@
 {
-  "name": "gemvision",
+  "name": "backoffice-interface",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
