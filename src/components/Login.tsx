@@ -9,7 +9,7 @@ import { loginState } from "@/types"
 const LoginPage = () => {
   const token = useSelector((state: loginState) => state.loginSlice.token)
 
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [openSnackbar, setOpenSnackbar] = useState(false)
@@ -18,30 +18,30 @@ const LoginPage = () => {
   const dispatch = useDispatch()
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      setError("Please enter both email and password")
+    if (!username || !password) {
+      setError("Please enter both username and password")
       return
     }
 
     try {
-      // const response = await fetch("https://reqres.in/api/login", {
-      // method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify({
-      //   email,
-      //   password,
-      // }),
-      // })
+      const response = await fetch(`${process.env.REACT_APP_SERVER}login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      })
 
-      // if (!response.ok) {
-      //   setError("Your credentials are not okay")
-      //   setOpenSnackbar(true)
-      //   throw new Error("Login failed")
-      // }
-      // const data = await response.json()
-      // dispatch(addToken(data.token))
+      if (!response.ok) {
+        setError("Your credentials are not okay")
+        setOpenSnackbar(true)
+        throw new Error("Login failed")
+      }
+      const data = await response.json()
+      dispatch(addToken(data.token))
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)
@@ -63,7 +63,7 @@ const LoginPage = () => {
         {/* Right part, login containter */}
         <Box className="login-form-container" sx={{ width: "50%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Container maxWidth="xs">
-            <TextField label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
+            <TextField label="Username" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} fullWidth margin="normal" />
             <TextField
               label="Password"
               variant="outlined"
@@ -75,7 +75,7 @@ const LoginPage = () => {
             />
 
             <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
-              <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !email}>
+              <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !username}>
                 Login
               </Button>
             </Box>
