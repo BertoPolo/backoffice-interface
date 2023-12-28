@@ -5,8 +5,8 @@ const userSlice = createSlice({
   initialState: {
     id: 0,
     email: "",
-    first_name: "",
-    last_name: "",
+    name: "",
+    lastname: "",
     avatar: "",
   },
   reducers: {
@@ -27,14 +27,14 @@ const userSlice = createSlice({
     changeFirstName: (state, action) => {
       return {
         ...state,
-        first_name: action.payload,
+        name: action.payload,
       }
     },
 
     changeLastName: (state, action) => {
       return {
         ...state,
-        last_name: action.payload,
+        lastname: action.payload,
       }
     },
 

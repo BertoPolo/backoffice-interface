@@ -28,20 +28,20 @@ const Register = () => {
     e.preventDefault()
     if (formData.password === confirmPassword) {
       try {
-        // const response = await fetch("https://reqres.in/api/register", {
-        // method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(formData),
-        // })
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error! status: ${response.status}`)
-        // } else {
-        //   const data = await response.json()
-        //   dispatch(addToken(data.token))
-        //   navigate("/users")
-        // }
+        const response = await fetch(`${process.env.REACT_APP_SERVER}users/createbackofficeuser`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        } else {
+          const data = await response.json()
+          dispatch(addToken(data.token))
+          navigate("/users")
+        }
       } catch (error) {
         console.error("Registration error:", error)
         setErrorMessage("Failed to register. Please try again.")

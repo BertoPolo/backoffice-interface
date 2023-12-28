@@ -11,10 +11,10 @@ const UserDetails = () => {
     const fetchUser = async () => {
       setLoading(true)
       try {
-        // const response = await fetch(`https://reqres.in/api/users/${id}`)
-        // if (!response.ok) throw new Error("User not found")
-        // const data = await response.json()
-        // setUser(data.data)
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/users/${id}`)
+        if (!response.ok) throw new Error("User not found")
+        const data = await response.json()
+        setUser(data.data)
       } catch (error) {
         console.error(error)
       } finally {
@@ -30,7 +30,7 @@ const UserDetails = () => {
 
   return (
     <>
-      <h1>{/* {user.avatar} {user.first_name} {user.last_name} */}</h1>
+      <h1>{/* {user.avatar} {user.name} {user.lastname} */}</h1>
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, consectetur. Dignissimos aut eveniet veniam quaerat fugiat dolores labore
         exercitationem quisquam adipisci aspernatur quo nemo doloribus, assumenda molestias amet animi non.

@@ -1,8 +1,8 @@
 export interface IUser {
   id: number
   email: string
-  first_name: string
-  last_name: string
+  name: string
+  lastname: string
   avatar: string
 }
 export interface loginState {

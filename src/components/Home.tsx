@@ -39,14 +39,14 @@ const Home = () => {
 
   const [selectedUserId, setSelectedUserId] = useState(0)
 
-  const [firstName, setFirstName] = useState("")
+  const [name, setName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
 
   const [isActive, setIsActive] = useState(false)
 
   const resetModalStates = () => {
-    setFirstName("")
+    setName("")
     setLastName("")
     setEmail("")
   }
@@ -54,7 +54,7 @@ const Home = () => {
   const fetchUsers = async () => {
     try {
       // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
-      const response = await fetch("https://login.auth0.com/api/v2/users", {
+      const response = await fetch(`${process.env.REACT_APP_SERVER}users`, {
         headers: { token: token },
       })
       if (!response.ok) {
@@ -82,8 +82,8 @@ const Home = () => {
     // search users and set'em to FilteredUsers
     const matchedUsers = users.filter(
       (user) =>
-        user.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     )
     setFilteredUsers(matchedUsers)
@@ -91,23 +91,23 @@ const Home = () => {
 
   const editUser = async () => {
     try {
-      // console.log("Edit user with ID:", selectedUserId)
-      // const response = await fetch(`https://reqres.in/api/users/${selectedUserId}`, {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     token: token,
-      //   },
-      //   body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email }),
-      // })
+      console.log("Edit user with ID:", selectedUserId)
+      const response = await fetch(`${process.env.REACT_APP_SERVER}users/${selectedUserId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+        },
+        body: JSON.stringify({ name: name, lastname: lastName, email: email }),
+      })
 
-      // if (response.ok) {
-      // const data = await response.json()
-      // console.log(data)
-      fetchUsers()
-      setIsEditModalOpen(false)
-      resetModalStates()
-      // }
+      if (response.ok) {
+        const data = await response.json()
+        console.log(data)
+        fetchUsers()
+        setIsEditModalOpen(false)
+        resetModalStates()
+      }
     } catch (error) {
       console.error("Error editing user:", error)
     }
@@ -116,15 +116,15 @@ const Home = () => {
   const handleDeleteUser = async (userId: number) => {
     try {
       console.log("Delete user with ID:", userId)
-      // const response = await fetch(`https://reqres.in/api/users/${userId}`, {
-      //   method: "DELETE",
-      // })
-      // if (response.ok) {
-      //   console.log("User deleted successfully")
-      //   fetchUsers()
-      // } else {
-      //   console.error("Failed to delete user")
-      // }
+      const response = await fetch(`${process.env.REACT_APP_SERVER}users/${userId}`, {
+        method: "DELETE",
+      })
+      if (response.ok) {
+        console.log("User deleted successfully")
+        fetchUsers()
+      } else {
+        console.error("Failed to delete user")
+      }
     } catch (error) {
       console.error("Error deleting user:", error)
     }
@@ -181,10 +181,10 @@ const Home = () => {
                     bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
                   })}
                 >
-                  <CardMedia component="img" height="140" image={user.avatar} alt={`${user.first_name} ${user.last_name}`} />
+                  <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {user.first_name} {user.last_name}
+                      {user.name} {user.lastname}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       <span className="mail"> {user.email}</span>
@@ -194,8 +194,8 @@ const Home = () => {
                     <IconButton
                       onClick={() => {
                         setSelectedUserId(user.id)
-                        setFirstName(user.first_name)
-                        setLastName(user.last_name)
+                        setName(user.name)
+                        setLastName(user.lastname)
                         setEmail(user.email)
                         setIsEditModalOpen(true)
                       }}
@@ -237,8 +237,8 @@ const Home = () => {
                 type="text"
                 fullWidth
                 variant="outlined"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 autoFocus
