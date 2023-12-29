@@ -55,12 +55,15 @@ const Home = () => {
     try {
       // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
       const response = await fetch(`${process.env.REACT_APP_SERVER}users`, {
-        headers: { token: token },
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       })
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
       }
       const data = await response.json()
+      console.log(data)
       setUsers(data.data)
       setFilteredUsers(data.data)
       setTotalPages(data.total_pages)
@@ -164,56 +167,59 @@ const Home = () => {
 
           {/* move this grid to a separate component */}
           <Grid container spacing={4} className="fade-in">
-            {filteredUsers.map((user) => (
-              <Grid item xs={12} sm={6} md={4} key={user.id}>
-                <Card
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    minHeight: "300px",
-                    maxHeight: "300px",
-                    justifyContent: "space-between",
-                  }}
-                  elevation={5}
-                  className={`fade-in ${isActive ? "active" : ""}`}
-                  sx={(theme) => ({
-                    bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
-                  })}
-                >
-                  <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {user.name} {user.lastname}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      <span className="mail"> {user.email}</span>
-                    </Typography>
-                  </CardContent>
-                  <div>
-                    <IconButton
-                      onClick={() => {
-                        setSelectedUserId(user.id)
-                        setName(user.name)
-                        setLastName(user.lastname)
-                        setEmail(user.email)
-                        setIsEditModalOpen(true)
-                      }}
-                    >
-                      <EditIcon color="primary" />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to delete this user? ")) handleDeleteUser(user.id)
-                      }}
-                    >
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                  </div>
-                </Card>
-              </Grid>
-            ))}
-            {filteredUsers.length === 0 && <Alert severity="error">No users found</Alert>}
+            {filteredUsers &&
+              filteredUsers.map((user) => (
+                <Grid item xs={12} sm={6} md={4} key={user.id}>
+                  <Card
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      minHeight: "300px",
+                      maxHeight: "300px",
+                      justifyContent: "space-between",
+                    }}
+                    elevation={5}
+                    className={`fade-in ${isActive ? "active" : ""}`}
+                    sx={(theme) => ({
+                      bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
+                    })}
+                  >
+                    {/* <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} /> */}
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {user.name}
+                        {/* {user.lastname} */}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="mail"> {user.email}</span>
+                      </Typography>
+                    </CardContent>
+                    <div>
+                      <IconButton
+                        onClick={() => {
+                          setSelectedUserId(user.id)
+                          setName(user.name)
+                          // setLastName(user.lastname)
+                          setEmail(user.email)
+                          setIsEditModalOpen(true)
+                        }}
+                      >
+                        <EditIcon color="primary" />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => {
+                          if (window.confirm("Are you sure you want to delete this user? ")) handleDeleteUser(user.id)
+                        }}
+                      >
+                        <DeleteIcon color="error" />
+                      </IconButton>
+                    </div>
+                  </Card>
+                </Grid>
+              ))}
+            {filteredUsers && <Alert severity="error">No users found</Alert>}
+            {/* && filteredUsers.length === 0 */}
           </Grid>
 
           {/* Pagination buttons */}
