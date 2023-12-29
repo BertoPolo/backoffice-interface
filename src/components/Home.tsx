@@ -145,6 +145,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+    // console.log("token:", token)
     fetchUsers()
     triggerFadeInAnimation()
   }, [currentPage])
@@ -168,7 +169,7 @@ const Home = () => {
           <Grid container spacing={4} className="fade-in">
             {filteredUsers &&
               filteredUsers.map((user) => (
-                <Grid item xs={12} sm={6} md={4} key={user.id}>
+                <Grid item xs={12} sm={6} md={4} key={user._id}>
                   <Card
                     style={{
                       display: "flex",
@@ -184,11 +185,11 @@ const Home = () => {
                       bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
                     })}
                   >
-                    {/* <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} /> */}
+                    <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {user.name}
-                        {/* {user.lastname} */}
+                        {user.lastname}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <span className="mail"> {user.email}</span>
@@ -197,9 +198,9 @@ const Home = () => {
                     <div>
                       <IconButton
                         onClick={() => {
-                          setSelectedUserId(user.id)
+                          setSelectedUserId(user._id)
                           setName(user.name)
-                          // setLastName(user.lastname)
+                          setLastName(user.lastname)
                           setEmail(user.email)
                           setIsEditModalOpen(true)
                         }}
@@ -208,7 +209,7 @@ const Home = () => {
                       </IconButton>
                       <IconButton
                         onClick={() => {
-                          if (window.confirm("Are you sure you want to delete this user? ")) handleDeleteUser(user.id)
+                          if (window.confirm("Are you sure you want to delete this user? ")) handleDeleteUser(user._id)
                         }}
                       >
                         <DeleteIcon color="error" />
@@ -217,7 +218,7 @@ const Home = () => {
                   </Card>
                 </Grid>
               ))}
-            {filteredUsers && <Alert severity="error">No users found</Alert>}
+            {!filteredUsers && <Alert severity="error">No users found</Alert>}
             {/* && filteredUsers.length === 0 */}
           </Grid>
 

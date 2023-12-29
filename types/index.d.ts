@@ -1,5 +1,5 @@
 export interface IUser {
-  id: number
+  _id: number
   email: string
   name: string
   lastname: string
@@ -8,7 +8,7 @@ export interface IUser {
 export interface loginState {
   loginSlice: {
     token: string
-    isLogged: boolean
+    // isLogged: boolean
   }
 }
 

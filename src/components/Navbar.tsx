@@ -6,7 +6,7 @@ import { removeToken } from "../slices/loginSlice"
 import { loginState, NavbarProps } from "@/types"
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
-  const isLogged = useSelector((state: loginState) => state.loginSlice.isLogged)
+  const token = useSelector((state: loginState) => state.loginSlice.token)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
 
           {children}
 
-          {isLogged ? (
+          {token ? (
             <Button
               color="error"
               size="small"
