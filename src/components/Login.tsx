@@ -24,15 +24,17 @@ const LoginPage = () => {
     }
 
     try {
+      const body = {
+        username: username,
+        password: password,
+      }
+
       const response = await fetch(`${process.env.REACT_APP_SERVER}users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+        body: JSON.stringify(body),
       })
 
       if (!response.ok) {
@@ -41,7 +43,7 @@ const LoginPage = () => {
         throw new Error("Login failed")
       }
       const data = await response.json()
-      dispatch(addToken(data.token))
+      dispatch(addToken(data.accessToken))
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)
