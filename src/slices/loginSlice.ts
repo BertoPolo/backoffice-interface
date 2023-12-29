@@ -4,14 +4,14 @@ const loginSlice = createSlice({
   name: "login",
   initialState: {
     token: "",
-    isLogged: false,
+    // isLogged: false,
   },
   reducers: {
     addToken: (state, action) => {
       return {
         ...state,
         token: action.payload,
-        isLogged: true,
+        // isLogged: true,
       }
     },
 
@@ -19,7 +19,7 @@ const loginSlice = createSlice({
       return {
         ...state,
         token: action.payload,
-        isLogged: false,
+        // isLogged: false,
       }
     },
 

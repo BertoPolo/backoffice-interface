@@ -10,7 +10,7 @@ import configureStore from "./store"
 import { persistStore } from "redux-persist"
 import { PersistGate } from "redux-persist/integration/react"
 
-let persistor = persistStore(configureStore)
+let persistor: any = persistStore(configureStore) // change this any type
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(

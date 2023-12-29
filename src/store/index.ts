@@ -5,12 +5,19 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import loginSlice from "../slices/loginSlice"
 // import usersSlice from "../slices/usersSlice"
 
+//////////////////
+declare module "redux-persist-transform-encrypt" {
+  export function encryptTransform(config: any): any
+}
+///////////////
 const reducers = combineReducers({
   loginSlice: loginSlice,
   // userSlice: userSlice,
 })
 
-const persistConfig = {
+//////////////
+const persistConfig: any = {
+  /////////////
   key: "root",
   storage: storage,
   transforms: [
