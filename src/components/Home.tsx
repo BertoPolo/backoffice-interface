@@ -63,10 +63,9 @@ const Home = () => {
         throw new Error(`Error: ${response.status}`)
       }
       const data = await response.json()
-      console.log(data)
-      setUsers(data.data)
-      setFilteredUsers(data.data)
-      setTotalPages(data.total_pages)
+      setUsers(data)
+      setFilteredUsers(data)
+      // setTotalPages(data.total_pages)
     } catch (error) {
       console.error("Error fetching users: ", error)
     }
@@ -151,7 +150,7 @@ const Home = () => {
   }, [currentPage])
 
   useEffect(() => {
-    window.addEventListener("beforeunload", handleWindowClose)
+    // window.addEventListener("beforeunload", handleWindowClose)
     setIsActive(true)
 
     return () => {

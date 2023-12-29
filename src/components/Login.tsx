@@ -74,6 +74,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               fullWidth
               margin="normal"
+              // onSubmit={handleLogin}
             />
 
             <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
