@@ -5,12 +5,12 @@ export interface IUser {
   lastname: string
   avatar: string
 }
-export interface loginState {
-  loginSlice: {
-    token: string
-    // isLogged: boolean
-  }
-}
+// export interface loginState {
+//   loginSlice: {
+//     token: string
+//     // isLogged: boolean
+//   }
+// }
 
 export interface IFormData {
   username: string

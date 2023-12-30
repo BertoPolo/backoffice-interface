@@ -1,13 +1,13 @@
-import React, { useState, SyntheticEvent } from "react"
+import { useState, useEffect, SyntheticEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container, Box, Snackbar } from "@mui/material/"
 import MuiAlert from "@mui/material/Alert"
 import { addToken } from "../slices/loginSlice"
 import { useSelector, useDispatch } from "react-redux"
-import { loginState } from "@/types"
+// import { loginState } from "@/types"
 
 const LoginPage = () => {
-  const token = useSelector((state: loginState) => state.loginSlice.token)
+  // const token = useSelector((state: loginState) => state.loginSlice.token)
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -43,7 +43,8 @@ const LoginPage = () => {
         throw new Error("Login failed")
       }
       const data = await response.json()
-      dispatch(addToken(data.accessToken))
+      // dispatch(addToken(data.accessToken))
+      sessionStorage.setItem("token", data.accessToken)
       navigate("/users")
     } catch (error: any) {
       setError("Login failed: " + error.message)

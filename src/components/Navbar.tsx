@@ -1,14 +1,12 @@
-// import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+// import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
-import { removeToken } from "../slices/loginSlice"
-import { loginState, NavbarProps } from "@/types"
+import { NavbarProps } from "@/types"
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
-  const token = useSelector((state: loginState) => state.loginSlice.token)
+  const token: any = sessionStorage.getItem("token")
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const navigate = useNavigate()
 
   return (
@@ -34,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
               variant="outlined"
               sx={{ fontSize: "0.7rem" }}
               onClick={() => {
-                dispatch(removeToken(""))
+                sessionStorage.removeItem("token")
                 navigate("/")
               }}
             >

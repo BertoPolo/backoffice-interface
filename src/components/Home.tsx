@@ -20,12 +20,13 @@ import {
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 
-import { IUser, loginState } from "@/types"
-import { removeToken } from "../slices/loginSlice"
+import { IUser } from "@/types"
+// import { removeToken } from "../slices/loginSlice"
 import SearchBar from "./SearchBar"
 
 const Home = () => {
-  const token = useSelector((state: loginState) => state.loginSlice.token)
+  // const token = useSelector((state: loginState) => state.loginSlice.token)
+  const token: any = sessionStorage.getItem("token")
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -69,10 +70,6 @@ const Home = () => {
     } catch (error) {
       console.error("Error fetching users: ", error)
     }
-  }
-
-  const handleWindowClose = (event: BeforeUnloadEvent) => {
-    dispatch(removeToken(""))
   }
 
   const handleSearch = () => {
@@ -145,18 +142,15 @@ const Home = () => {
   }
 
   useEffect(() => {
-    // console.log("token:", token)
     fetchUsers()
     triggerFadeInAnimation()
   }, [currentPage])
 
   useEffect(() => {
-    // window.addEventListener("beforeunload", handleWindowClose)
-    setIsActive(true)
+    setIsActive(true) // do i still need it?
+    // console.log("token:", token)
 
-    return () => {
-      window.removeEventListener("beforeunload", handleWindowClose)
-    }
+    if (!token) navigate("/login")
   }, [])
 
   return (
