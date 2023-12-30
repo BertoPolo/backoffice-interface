@@ -150,7 +150,14 @@ const Home = () => {
     setIsActive(true) // do i still need it?
     // console.log("token:", token)
 
-    if (!token) navigate("/login")
+    if (!token) {
+      window.addEventListener("unload", () => sessionStorage.removeItem("token"))
+
+      navigate("/login")
+      return () => {
+        window.removeEventListener("unload", () => sessionStorage.removeItem("token"))
+      }
+    }
   }, [])
 
   return (
