@@ -1,13 +1,12 @@
 import React, { FormEventHandler, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, TextField, Button, Typography, Paper, Alert, Box } from "@mui/material"
-import { IFormData, loginState } from "@/types"
+import { IFormData } from "@/types"
 import { useSelector, useDispatch } from "react-redux"
 import { addToken } from "../slices/loginSlice"
 
 const Register = () => {
   const navigate = useNavigate()
-  const token = useSelector((state: loginState) => state.loginSlice.token)
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState<IFormData>({
