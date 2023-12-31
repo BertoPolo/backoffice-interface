@@ -186,7 +186,14 @@ const Home = () => {
                       bgcolor: theme.palette.mode === "dark" ? "#0a0c1e" : "#c4c5df",
                     })}
                   >
-                    <CardMedia component="img" height="140" image={user.avatar} alt={`${user.name} ${user.lastname}`} />
+                    <CardMedia
+                      className="pointer"
+                      component="img"
+                      height="140"
+                      image={user.avatar}
+                      alt={`${user.name} ${user.lastname}`}
+                      onClick={() => navigate(`/users/${user._id}`)}
+                    />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {user.name}
