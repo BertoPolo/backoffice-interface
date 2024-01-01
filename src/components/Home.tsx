@@ -37,14 +37,14 @@ const Home = () => {
   const [selectedUserId, setSelectedUserId] = useState(0)
 
   const [name, setName] = useState("")
-  const [lastName, setLastName] = useState("")
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
 
   const [isActive, setIsActive] = useState(false)
 
   const resetModalStates = () => {
     setName("")
-    setLastName("")
+    setUsername("")
     setEmail("")
   }
 
@@ -76,14 +76,14 @@ const Home = () => {
 
   const editUser = async () => {
     try {
-      console.log("Edit user with ID:", selectedUserId)
+      // console.log("Edit user with ID:", selectedUserId)
       const response = await fetch(`${process.env.REACT_APP_SERVER}users/${selectedUserId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           token: token,
         },
-        body: JSON.stringify({ name: name, lastname: lastName, email: email }),
+        body: JSON.stringify({ name: name, username: username, email: email }),
       })
 
       if (response.ok) {
@@ -176,13 +176,13 @@ const Home = () => {
                       component="img"
                       height="140"
                       image={user.avatar}
-                      alt={`${user.name} ${user.lastname}`}
+                      alt={`${user.name} ${user.username}`}
                       onClick={() => navigate(`/users/${user._id}`)}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {user.name}
-                        {user.lastname}
+                        {user.username}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <span className="mail"> {user.email}</span>
@@ -193,7 +193,7 @@ const Home = () => {
                         onClick={() => {
                           setSelectedUserId(user._id)
                           setName(user.name)
-                          setLastName(user.lastname)
+                          setUsername(user.username)
                           setEmail(user.email)
                           setIsEditModalOpen(true)
                         }}
@@ -211,7 +211,7 @@ const Home = () => {
                   </Card>
                 </Grid>
               ))}
-            {!users && <Alert severity="error">No users found</Alert>}
+            {users.length === 0 && <Alert severity="error">No users found</Alert>}
             {/* && filteredUsers.length === 0 */}
           </Grid>
 
@@ -243,12 +243,12 @@ const Home = () => {
                 autoFocus
                 margin="dense"
                 id="name"
-                label="Name"
+                label="Last Name"
                 type="text"
                 fullWidth
                 variant="outlined"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
                 margin="dense"

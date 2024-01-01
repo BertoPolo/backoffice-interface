@@ -6,7 +6,7 @@ const userSlice = createSlice({
     id: 0,
     email: "",
     name: "",
-    lastname: "",
+    username: "",
     avatar: "",
   },
   reducers: {
@@ -31,10 +31,10 @@ const userSlice = createSlice({
       }
     },
 
-    changeLastName: (state, action) => {
+    changeUserName: (state, action) => {
       return {
         ...state,
-        lastname: action.payload,
+        username: action.payload,
       }
     },
 
@@ -48,4 +48,4 @@ const userSlice = createSlice({
 })
 
 export default userSlice.reducer
-export const { changeId, changeEmail, changeFirstName, changeLastName, changeAvatar } = userSlice.actions
+export const { changeId, changeEmail, changeFirstName, changeUserName, changeAvatar } = userSlice.actions

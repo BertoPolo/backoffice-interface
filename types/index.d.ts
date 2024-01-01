@@ -4,7 +4,7 @@ export interface IUser {
   _id: number
   email: string
   name: string
-  lastname: string
+  username: string
   avatar: string
 }
 // export interface loginState {
