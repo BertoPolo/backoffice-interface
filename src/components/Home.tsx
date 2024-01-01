@@ -76,19 +76,17 @@ const Home = () => {
 
   const editUser = async () => {
     try {
-      // console.log("Edit user with ID:", selectedUserId)
       const response = await fetch(`${process.env.REACT_APP_SERVER}users/${selectedUserId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          token: token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ name: name, username: username, email: email }),
       })
 
       if (response.ok) {
         const data = await response.json()
-        console.log(data)
         fetchUsers()
         setIsEditModalOpen(false)
         resetModalStates()
@@ -103,6 +101,9 @@ const Home = () => {
       console.log("Delete user with ID:", userId)
       const response = await fetch(`${process.env.REACT_APP_SERVER}users/${userId}`, {
         method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       })
       if (response.ok) {
         console.log("User deleted successfully")
