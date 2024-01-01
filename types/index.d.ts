@@ -1,3 +1,5 @@
+import React from "react"
+
 export interface IUser {
   _id: number
   email: string
@@ -11,6 +13,11 @@ export interface IUser {
 //     // isLogged: boolean
 //   }
 // }
+export interface SearchBarProps {
+  searchTerm: string
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+  handleSearch: () => void
+}
 
 export interface IFormData {
   username: string

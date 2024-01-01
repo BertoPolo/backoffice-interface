@@ -2,12 +2,8 @@ import React from "react"
 import { TextField, IconButton, InputAdornment, Box } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import CloseIcon from "@mui/icons-material/Close"
+import { SearchBarProps } from "@/types"
 
-interface SearchBarProps {
-  searchTerm: string
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-  handleSearch: () => void
-}
 const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, handleSearch }) => {
   return (
     <Box display="flex" alignItems="center" gap={1}>
