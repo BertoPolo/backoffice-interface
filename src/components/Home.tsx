@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
   Container,
@@ -21,19 +20,16 @@ import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 import { IUser } from "@/types"
-// import { removeToken } from "../slices/loginSlice"
 import SearchBar from "./SearchBar"
 
 const Home = () => {
-  // const token = useSelector((state: loginState) => state.loginSlice.token)
   const token: any = sessionStorage.getItem("token")
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const [users, setUsers] = useState<IUser[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-  const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
+  // const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
   const [totalPages, setTotalPages] = useState(0) // Total number pages you can retrieve from API in this search
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -54,38 +50,28 @@ const Home = () => {
 
   const fetchUsers = async () => {
     try {
+      let url = `${process.env.REACT_APP_SERVER}users`
+      if (searchTerm) {
+        url += `?name=/^${encodeURIComponent(searchTerm)}/i`
+      }
+
       // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
-      const response = await fetch(`${process.env.REACT_APP_SERVER}users`, {
+      const response = await fetch(url, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
       }
+
       const data = await response.json()
       setUsers(data)
-      setFilteredUsers(data)
       // setTotalPages(data.total_pages)
     } catch (error) {
       console.error("Error fetching users: ", error)
     }
-  }
-
-  const handleSearch = () => {
-    if (!searchTerm.trim()) {
-      setFilteredUsers(users)
-      return
-    }
-
-    // search users and set'em to FilteredUsers
-    const matchedUsers = users.filter(
-      (user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    setFilteredUsers(matchedUsers)
   }
 
   const editUser = async () => {
@@ -148,7 +134,6 @@ const Home = () => {
 
   useEffect(() => {
     setIsActive(true) // do i still need it?
-    // console.log("token:", token)
 
     if (!token) {
       window.addEventListener("unload", () => sessionStorage.removeItem("token"))
@@ -164,12 +149,12 @@ const Home = () => {
     <>
       {token ? (
         <Container maxWidth="md">
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchUsers={fetchUsers} />
 
           {/* move this grid to a separate component */}
           <Grid container spacing={4} className="fade-in">
-            {filteredUsers &&
-              filteredUsers.map((user) => (
+            {users &&
+              users.map((user) => (
                 <Grid item xs={12} sm={6} md={4} key={user._id}>
                   <Card
                     style={{
@@ -226,7 +211,7 @@ const Home = () => {
                   </Card>
                 </Grid>
               ))}
-            {!filteredUsers && <Alert severity="error">No users found</Alert>}
+            {!users && <Alert severity="error">No users found</Alert>}
             {/* && filteredUsers.length === 0 */}
           </Grid>
 

@@ -16,7 +16,7 @@ export interface IUser {
 export interface SearchBarProps {
   searchTerm: string
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-  handleSearch: () => void
+  fetchUsers: () => void
 }
 
 export interface IFormData {

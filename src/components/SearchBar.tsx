@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import CloseIcon from "@mui/icons-material/Close"
 import { SearchBarProps } from "@/types"
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, handleSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, fetchUsers }) => {
   return (
     <Box display="flex" alignItems="center" gap={1}>
       <TextField
@@ -17,7 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, handle
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton onClick={handleSearch} edge="start" onKeyDown={handleSearch}>
+              <IconButton onClick={fetchUsers} edge="start" onKeyDown={fetchUsers}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
@@ -32,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, handle
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            handleSearch()
+            fetchUsers()
           }
         }}
         sx={(theme) => ({
