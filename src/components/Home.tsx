@@ -86,7 +86,6 @@ const Home = () => {
       })
 
       if (response.ok) {
-        const data = await response.json()
         fetchUsers()
         setIsEditModalOpen(false)
         resetModalStates()
@@ -177,7 +176,7 @@ const Home = () => {
                       component="img"
                       height="140"
                       image={user.avatar}
-                      alt={`${user.name} ${user.username}`}
+                      alt={`${user.name}`}
                       onClick={() => navigate(`/users/${user._id}`)}
                     />
                     <CardContent>
