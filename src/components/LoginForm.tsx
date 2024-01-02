@@ -71,9 +71,9 @@ const LoginForm = () => {
         </Box>
 
         <Box textAlign="center" sx={{ width: "100%" }}>
-          <Button variant="contained" color="warning" onClick={() => navigate("/register")} sx={{ width: "45%" }}>
+          <small style={{ color: "#a148ef" }} onClick={() => navigate("/register")}>
             First time here?
-          </Button>
+          </small>
         </Box>
       </Container>
 

@@ -57,7 +57,10 @@ const LoginPage = () => {
               backgroundSize: "cover",
             }}
           ></Box>
-          <Box className="login-form-container" sx={{ width: "50%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Box
+            className="login-form-container"
+            sx={{ width: "50%", display: "flex", justifyContent: "center", alignItems: "center", color: "white" }}
+          >
             <LoginForm />
           </Box>
         </>
