@@ -176,13 +176,12 @@ const Home = () => {
                       component="img"
                       height="140"
                       image={user.avatar}
-                      alt={`${user.name}`}
+                      alt={`${user.username}`}
                       onClick={() => navigate(`/users/${user._id}`)}
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {user.name}
-                        {user.username}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         <span className="mail"> {user.email}</span>
