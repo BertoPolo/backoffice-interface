@@ -19,14 +19,17 @@ import {
 } from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
+import { useTheme } from "@mui/material/styles"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 import { IUser } from "@/types"
 import SearchBar from "./SearchBar"
 
 const Home = () => {
   const token: any = sessionStorage.getItem("token")
-
   const navigate = useNavigate()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
   const [users, setUsers] = useState<IUser[]>([])
   const [searchTerm, setSearchTerm] = useState("")
@@ -216,12 +219,21 @@ const Home = () => {
           </Grid>
 
           {/* Pagination buttons */}
-          <Button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} sx={{ mt: "1.2rem", mb: "1.5rem" }}>
-            Previous
-          </Button>
-          <Button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={currentPage >= totalPages} sx={{ mt: "1.2rem", mb: "1.5rem" }}>
-            Next
-          </Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: isMobile ? "space-between" : "flex-start", // Aligns to the right on small screens
+              mt: "1.2rem",
+              mb: "1.5rem",
+            }}
+          >
+            <Button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+              <b>Previous</b>
+            </Button>
+            <Button onClick={() => setCurrentPage((prev) => prev + 1)} disabled={currentPage >= totalPages}>
+              <b>Next</b>
+            </Button>
+          </Box>
 
           {/* move this modal to a separate component*/}
           <Dialog open={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
