@@ -15,6 +15,7 @@ import {
   DialogActions,
   DialogTitle,
   DialogContent,
+  Box,
 } from "@mui/material/"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -148,7 +149,7 @@ const Home = () => {
   return (
     <>
       {token ? (
-        <Container maxWidth="md">
+        <Container maxWidth="md" style={{ marginTop: "40px" }}>
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} fetchUsers={fetchUsers} />
 
           {/* move this grid to a separate component */}
@@ -187,7 +188,7 @@ const Home = () => {
                         <span className="mail"> {user.email}</span>
                       </Typography>
                     </CardContent>
-                    <div>
+                    <Box sx={{ mb: "0.5rem" }}>
                       <IconButton
                         onClick={() => {
                           setSelectedUserId(user._id)
@@ -206,7 +207,7 @@ const Home = () => {
                       >
                         <DeleteIcon color="error" />
                       </IconButton>
-                    </div>
+                    </Box>
                   </Card>
                 </Grid>
               ))}
