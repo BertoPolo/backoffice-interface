@@ -25,7 +25,7 @@ const LoginPage = () => {
 
     try {
       const body = {
-        username: username,
+        username: username.toLocaleLowerCase(),
         password: password,
       }
 
