@@ -10,7 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const navigate = useNavigate()
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} id="navbar">
       <AppBar position="static" sx={{ bgcolor: "background.paper" }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="secondary" aria-label="menu" sx={{ mr: 2 }} onClick={() => navigate("/users")}>

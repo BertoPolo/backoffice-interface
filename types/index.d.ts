@@ -7,12 +7,7 @@ export interface IUser {
   username: string
   avatar: string
 }
-// export interface loginState {
-//   loginSlice: {
-//     token: string
-//     // isLogged: boolean
-//   }
-// }
+
 export interface SearchBarProps {
   searchTerm: string
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
