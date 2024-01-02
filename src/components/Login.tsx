@@ -17,34 +17,52 @@ const LoginPage = () => {
       setNavbarHeight(navbar.offsetHeight)
     }
   }, [])
+
   const adjustedHeight = `calc(100vh - ${navbarHeight}px)`
   return (
-    <>
+    <Box
+      className={isMobile ? "login-blank-container" : ""}
+      sx={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        height: adjustedHeight,
+        width: "100vw",
+        justifyContent: "center",
+        alignItems: "center",
+        ...(isMobile ? {} : { overflow: "hidden" }), // Prevent scroll on larger screens
+      }}
+    >
       {isMobile ? (
-        <>
-          <Box sx={{ display: "flex", flexDirection: "row", height: adjustedHeight, width: "100vw" }}>
-            <Box className="login-blank-container" sx={{ height: "100%" }}>
-              <LoginForm />
-            </Box>
-          </Box>
-        </>
+        // Mobile view
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: "400px",
+            p: 2,
+            boxShadow: 3,
+            bgcolor: "background.paper",
+            color: "white",
+          }}
+        >
+          <LoginForm />
+        </Box>
       ) : (
+        // Desktop and larger view
         <>
-          <Box sx={{ display: "flex", flexDirection: "row", height: adjustedHeight, width: "100vw" }}>
-            {/* left part, blank container */}
-            <Box className="login-blank-container" sx={{ width: "50%", height: adjustedHeight }}></Box>
-
-            {/* Right part, login containter */}
-            <Box
-              className="login-form-container"
-              sx={{ width: "50%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
-            >
-              <LoginForm />
-            </Box>
+          <Box
+            className="login-blank-container"
+            sx={{
+              width: "50%",
+              height: "100%",
+              backgroundSize: "cover",
+            }}
+          ></Box>
+          <Box className="login-form-container" sx={{ width: "50%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <LoginForm />
           </Box>
         </>
       )}
-    </>
+    </Box>
   )
 }
 

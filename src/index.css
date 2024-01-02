@@ -43,3 +43,6 @@ body {
   background-size: cover;
   background-position: center;
 }
+.transparency-background-box {
+  background-color: #e9e3e3a6;
+}
