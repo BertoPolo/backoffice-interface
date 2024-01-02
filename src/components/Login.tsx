@@ -29,16 +29,17 @@ const LoginPage = () => {
         width: "100vw",
         justifyContent: "center",
         alignItems: "center",
-        ...(isMobile ? {} : { overflow: "hidden" }), // Prevent scroll on larger screens
+        ...(!isMobile ? {} : { overflow: "hidden" }), // Prevent vertical scroll on larger screens
       }}
     >
       {isMobile ? (
         // Mobile view
         <Box
           sx={{
-            width: "100%",
+            width: "85%",
             maxWidth: "400px",
-            p: 2,
+            pt: 4,
+            pb: 4,
             boxShadow: 3,
             bgcolor: "background.paper",
             color: "white",

@@ -2,13 +2,18 @@ import { useState, SyntheticEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, TextField, Container, Box, Snackbar } from "@mui/material/"
 import MuiAlert from "@mui/material/Alert"
+import { useTheme } from "@mui/material/styles"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 const LoginForm = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [openSnackbar, setOpenSnackbar] = useState(false)
+
   const navigate = useNavigate()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -52,17 +57,26 @@ const LoginForm = () => {
   return (
     <>
       <Container maxWidth="xs">
-        <TextField label="Username" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} fullWidth margin="normal" />
-        <TextField
-          label="Password"
-          variant="outlined"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          fullWidth
-          margin="normal"
-          // onSubmit={handleLogin}
-        />
+        <Box textAlign="center" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <TextField
+            label="Username"
+            variant="outlined"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            fullWidth={!isMobile}
+            margin="normal"
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth={!isMobile}
+            margin="normal"
+            // onSubmit={handleLogin}
+          />
+        </Box>
 
         <Box textAlign="center" sx={{ width: "100%", mt: "3.5rem", mb: "0.6rem" }}>
           <Button variant="contained" color="primary" onClick={handleLogin} sx={{ width: "45%" }} disabled={!password || !username}>
