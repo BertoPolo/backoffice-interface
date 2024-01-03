@@ -62,7 +62,7 @@ const UserDetails = () => {
           <h1>{user.name}</h1>
           <h1>{user.username}</h1>
           <p>{user.email}</p>
-          <p>is this an admin user? :{user.isAdmin}</p>
+          <p>Is this an admin user? :{user.isAdmin}</p>
           <p>{user.address}</p>
         </>
       )}

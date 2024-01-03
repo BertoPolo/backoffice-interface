@@ -19,7 +19,10 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const handleScroll = () => {
     const currentScrollY = window.scrollY
 
-    if (currentScrollY < lastScrollY) {
+    if (currentScrollY <= 0) {
+      // At the top of the page
+      setShowNavbar(true)
+    } else if (currentScrollY < lastScrollY) {
       // Scrolling up
       setShowNavbar(true)
     } else if (currentScrollY > lastScrollY) {
