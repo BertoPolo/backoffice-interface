@@ -8,7 +8,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, fetchU
   return (
     <Box display="flex" alignItems="center" gap={1}>
       <TextField
-        placeholder="Search Users"
+        placeholder="Search users by name"
         variant="outlined"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

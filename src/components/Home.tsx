@@ -56,12 +56,15 @@ const Home = () => {
 
   const fetchUsers = async () => {
     try {
-      let url = `${process.env.REACT_APP_SERVER}users/withtotalnumber?page=${encodeURIComponent(currentPage)}&limit=${encodeURIComponent(
-        usersLimitNum
-      )}`
+      let url
       if (searchTerm) {
         url = `${process.env.REACT_APP_SERVER}users?name=/^${encodeURIComponent(searchTerm)}/i`
+      } else {
+        url = `${process.env.REACT_APP_SERVER}users/withtotalnumber?page=${encodeURIComponent(currentPage)}&limit=${encodeURIComponent(
+          usersLimitNum
+        )}`
       }
+
       const response = await fetch(url, {
         headers: {
           Authorization: "Bearer " + token,
@@ -73,8 +76,11 @@ const Home = () => {
       }
 
       const data = await response.json()
-      setUsers(data.users)
-      if (searchTerm) setTotalPages(Math.ceil(data.total / usersLimitNum))
+      setUsers(data.users || data)
+
+      if (!searchTerm) {
+        setTotalPages(Math.ceil(data.total / usersLimitNum))
+      }
     } catch (error) {
       console.error("Error fetching users:", error)
     }
