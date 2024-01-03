@@ -22,7 +22,6 @@ const UserDetails = () => {
   const fetchUser = async () => {
     setLoading(true)
     const token = sessionStorage.getItem("token")
-
     if (!token) {
       console.error("No token found")
       setLoading(false)
@@ -56,16 +55,17 @@ const UserDetails = () => {
   // if (!user) return <div>No user found</div>
 
   return (
-    <Container style={{ paddingTop: "80px" }}>
+    <Container style={{ paddingTop: "3rem" }}>
       {id && (
-        <h1>
-          {user.avatar} {user.name}
-        </h1>
+        <>
+          <img src={user.avatar} alt="user avatar" style={{ height: "30vh" }} />
+          <h1>{user.name}</h1>
+          <h1>{user.username}</h1>
+          <p>{user.email}</p>
+          <p>is this an admin user? :{user.isAdmin}</p>
+          <p>{user.address}</p>
+        </>
       )}
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, consectetur. Dignissimos aut eveniet veniam quaerat fugiat dolores labore
-        exercitationem quisquam adipisci aspernatur quo nemo doloribus, assumenda molestias amet animi non.
-      </p>
     </Container>
   )
 }
