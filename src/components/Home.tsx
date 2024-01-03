@@ -46,6 +46,8 @@ const Home = () => {
 
   const [isActive, setIsActive] = useState(false)
 
+  const usersLimitNum = 6
+
   const resetModalStates = () => {
     setName("")
     setUsername("")
@@ -54,12 +56,12 @@ const Home = () => {
 
   const fetchUsers = async () => {
     try {
-      let url = `${process.env.REACT_APP_SERVER}users`
+      let url = `${process.env.REACT_APP_SERVER}users/withtotalnumber?page=${encodeURIComponent(currentPage)}&limit=${encodeURIComponent(
+        usersLimitNum
+      )}`
       if (searchTerm) {
-        url += `?name=/^${encodeURIComponent(searchTerm)}/i`
+        url = `${process.env.REACT_APP_SERVER}users?name=/^${encodeURIComponent(searchTerm)}/i`
       }
-
-      // const response = await fetch(`https://reqres.in/api/users?page=${currentPage}&per_page=6`, {
       const response = await fetch(url, {
         headers: {
           Authorization: "Bearer " + token,
@@ -71,10 +73,10 @@ const Home = () => {
       }
 
       const data = await response.json()
-      setUsers(data)
-      // setTotalPages(data.total_pages)
+      setUsers(data.users)
+      if (searchTerm) setTotalPages(Math.ceil(data.total / usersLimitNum))
     } catch (error) {
-      console.error("Error fetching users: ", error)
+      console.error("Error fetching users:", error)
     }
   }
 
