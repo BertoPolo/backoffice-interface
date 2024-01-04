@@ -58,62 +58,129 @@ const Register = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "90vh",
+        paddingTop: "5rem",
       }}
     >
-      <Paper elevation={6} style={{ padding: 16 }}>
+      <Paper elevation={6} style={{ padding: 16, display: "flex", flexDirection: "column", alignItems: "center", width: "100%", maxWidth: "70vw" }}>
         <Typography component="h1" variant="h5">
           Register
         </Typography>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <form onSubmit={registration}>
-          <TextField variant="outlined" margin="normal" required fullWidth label="Name" name="Name" value={formData.name} onChange={handleChange} />
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
+            label="Name"
+            name="Name"
+            value={formData.name}
+            onChange={handleChange}
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                padding: "10px 14px",
+              },
+              "& .MuiInputLabel-root": {
+                transform: "translate(14px, 10px) scale(1)",
+              },
+              "& .MuiInputLabel-shrink": {
+                transform: "translate(14px, -6px) scale(0.75)",
+              },
+              width: "100%",
+              mx: "auto",
+            }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
             label="Username"
             name="username"
             value={formData.username}
             onChange={handleChange}
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                padding: "10px 14px",
+              },
+              "& .MuiInputLabel-root": {
+                transform: "translate(14px, 10px) scale(1)",
+              },
+              "& .MuiInputLabel-shrink": {
+                transform: "translate(14px, -6px) scale(0.75)",
+              },
+              width: "100%",
+              mx: "auto",
+            }}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
             label="Email Address"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            sx={{ my: "0.5rem" }}
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                padding: "10px 14px",
+              },
+              "& .MuiInputLabel-root": {
+                transform: "translate(14px, 10px) scale(1)",
+              },
+              "& .MuiInputLabel-shrink": {
+                transform: "translate(14px, -6px) scale(0.75)",
+              },
+              width: "100%",
+              mx: "auto",
+            }}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
             name="password"
             label="Password"
             type="password"
             value={formData.password}
             onChange={handleChange}
-            sx={{ my: "0.5rem" }}
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                padding: "10px 14px",
+              },
+              "& .MuiInputLabel-root": {
+                transform: "translate(14px, 10px) scale(1)",
+              },
+              "& .MuiInputLabel-shrink": {
+                transform: "translate(14px, -6px) scale(0.75)",
+              },
+              width: "100%",
+              mx: "auto",
+            }}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
             name="confirmPassword"
             label="Confirm Password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            sx={{ my: "0.5rem" }}
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                padding: "10px 14px",
+              },
+              "& .MuiInputLabel-root": {
+                transform: "translate(14px, 10px) scale(1)",
+              },
+              "& .MuiInputLabel-shrink": {
+                transform: "translate(14px, -6px) scale(0.75)",
+              },
+              width: "100%",
+              mx: "auto",
+            }}
           />
           <Box textAlign="center" sx={{ width: "100%" }}>
-            <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: 24, width: "40%" }}>
+            <Button type="submit" variant="contained" color="primary" style={{ marginTop: 24, width: "40%" }}>
               Register
             </Button>
           </Box>

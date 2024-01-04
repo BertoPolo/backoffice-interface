@@ -85,7 +85,7 @@ const LoginForm = () => {
         </Box>
 
         <Box textAlign="center" sx={{ width: "100%" }}>
-          <small style={{ color: "#a148ef" }} onClick={() => navigate("/register")}>
+          <small className="pointer" style={{ color: "#a148ef" }} onClick={() => navigate("/register")}>
             First time here?
           </small>
         </Box>
