@@ -265,7 +265,7 @@ const Home = () => {
                 autoFocus
                 margin="dense"
                 id="name"
-                label="Last Name"
+                label="Username"
                 type="text"
                 fullWidth
                 variant="outlined"
