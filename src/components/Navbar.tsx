@@ -53,6 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
               <path fill="#c28fef" d="m32 60l12.5-39.9H18.8zM9.5 9.5L2 20.1h16.8L23 4zm45 0L41 4l3.5 16.1H62z" />
             </svg>
           </IconButton>
+          {/* do not display when you are at /login */}
           <Typography className="pointer" variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={() => navigate("/users")}>
             Home
           </Typography>

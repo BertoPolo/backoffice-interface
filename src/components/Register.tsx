@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault()
     if (formData.password === confirmPassword) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}users/createbackofficeuser`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}users/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

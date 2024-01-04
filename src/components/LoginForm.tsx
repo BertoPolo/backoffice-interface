@@ -43,8 +43,12 @@ const LoginForm = () => {
       const data = await response.json()
       sessionStorage.setItem("token", data.accessToken)
       navigate("/users")
-    } catch (error: any) {
-      setError("Login failed: " + error.message)
+    } catch (error) {
+      if (error instanceof Error) {
+        setError("Login failed: " + error.message)
+      } else {
+        setError("Login failed: An unknown error occurred")
+      }
     }
   }
 
@@ -57,6 +61,7 @@ const LoginForm = () => {
   return (
     <>
       <Container maxWidth="xs">
+        {/* <h2>Welcome back!</h2> */}
         <Box textAlign="center" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <TextField
             label="Username"
