@@ -193,7 +193,7 @@ const Home = () => {
                       alt={`${user.username}`}
                       onClick={() => navigate(`/users/${user._id}`)}
                     />
-                    <CardContent>
+                    <CardContent style={{ textAlign: "center" }}>
                       <Typography gutterBottom variant="h5" component="div">
                         {user.name}
                       </Typography>
