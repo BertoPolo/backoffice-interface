@@ -1,6 +1,6 @@
 // import { useDispatch } from "react-redux"
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { AppBar, Box, Toolbar, Button, Typography, IconButton } from "@mui/material/"
 import { NavbarProps } from "@/types"
 import { useTheme } from "@mui/material/styles"
@@ -15,6 +15,8 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [showNavbar, setShowNavbar] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const location = useLocation()
+  const isLoginRoute = location.pathname === "/login"
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY
@@ -53,8 +55,14 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
               <path fill="#c28fef" d="m32 60l12.5-39.9H18.8zM9.5 9.5L2 20.1h16.8L23 4zm45 0L41 4l3.5 16.1H62z" />
             </svg>
           </IconButton>
-          {/* do not display when you are at /login */}
-          <Typography className="pointer" variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={() => navigate("/users")}>
+
+          <Typography
+            className="pointer"
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, opacity: isLoginRoute ? 0 : 1 }}
+            onClick={() => navigate("/users")}
+          >
             Home
           </Typography>
 
