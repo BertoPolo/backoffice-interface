@@ -2,7 +2,7 @@ import React, { FormEventHandler, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container, TextField, Button, Typography, Paper, Alert, Box } from "@mui/material"
 import { IFormData } from "@/types"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { addToken } from "../slices/loginSlice"
 
 const Register = () => {
@@ -10,6 +10,7 @@ const Register = () => {
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState<IFormData>({
+    name: "",
     username: "",
     email: "",
     password: "",
@@ -65,6 +66,7 @@ const Register = () => {
         </Typography>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <form onSubmit={registration}>
+          <TextField variant="outlined" margin="normal" required fullWidth label="Name" name="Name" value={formData.name} onChange={handleChange} />
           <TextField
             variant="outlined"
             margin="normal"

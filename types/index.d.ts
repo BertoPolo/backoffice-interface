@@ -15,6 +15,7 @@ export interface SearchBarProps {
 }
 
 export interface IFormData {
+  name: string
   username: string
   email: string
   password: string
