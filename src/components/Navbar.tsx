@@ -7,7 +7,7 @@ import { useTheme } from "@mui/material/styles"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {
-  const token: any = sessionStorage.getItem("token")
+  const token: string | null = sessionStorage.getItem("token")
 
   // const dispatch = useDispatch()
   const navigate = useNavigate()

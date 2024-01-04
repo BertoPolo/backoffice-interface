@@ -26,15 +26,14 @@ import { IUser } from "@/types"
 import SearchBar from "./SearchBar"
 
 const Home = () => {
-  const token: any = sessionStorage.getItem("token")
   const navigate = useNavigate()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
+  const token: string | null = sessionStorage.getItem("token")
   const [users, setUsers] = useState<IUser[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-  // const [filteredUsers, setFilteredUsers] = useState<IUser[]>([])
-  const [totalPages, setTotalPages] = useState(0) // Total number pages you can retrieve from API in this search
+  const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
