@@ -80,7 +80,6 @@ const Home = () => {
 
       if (!searchTerm) {
         setTotalPages(Math.ceil(data.total / usersLimitNum))
-        console.log(`Total pages:${totalPages}`)
       } else {
         setTotalPages(1)
       }

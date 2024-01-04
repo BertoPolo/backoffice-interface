@@ -1,10 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { TextField, IconButton, InputAdornment, Box } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import CloseIcon from "@mui/icons-material/Close"
 import { SearchBarProps } from "@/types"
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, fetchUsers }) => {
+  useEffect(() => {
+    fetchUsers()
+  }, [searchTerm])
   return (
     <Box display="flex" alignItems="center" gap={1}>
       <TextField
@@ -30,11 +33,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, fetchU
             </InputAdornment>
           ),
         }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            fetchUsers()
-          }
-        }}
+        // onKeyDown={(e) => {
+        //   if (e.key === "Enter") {
+        //     fetchUsers()
+        //   }
+        // }}
         sx={(theme) => ({
           "& .MuiOutlinedInput-root": {
             borderRadius: "20px", // Rounded corners
