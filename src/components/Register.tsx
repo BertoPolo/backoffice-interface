@@ -183,6 +183,9 @@ const Register = () => {
             <Button type="submit" variant="contained" color="primary" style={{ marginTop: 24, width: "40%" }}>
               Register
             </Button>
+            {/* <Button variant="contained" color="primary" style={{ marginTop: 24, width: "40%" }}>
+              Upload your picture
+            </Button> */}
           </Box>
         </form>
       </Paper>
